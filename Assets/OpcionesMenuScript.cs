@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+
 
 public class OpcionesMenuScript : MonoBehaviour
 {
@@ -10,12 +12,12 @@ public class OpcionesMenuScript : MonoBehaviour
 
     Resolution[] arrayResoluciones;
 
-    public Dropdown bttnDropownResolucion;
+    public TMP_Dropdown  bttnDropdownResolucion;
 
     private void Start()
     {
         arrayResoluciones = Screen.resolutions;
-        bttnDropownResolucion.ClearOptions();
+        bttnDropdownResolucion.ClearOptions();
         List<string> opciones = new List<string>();
         int indiceResolucionActual = 0;
         for (int i = 0; i < arrayResoluciones.Length; i++) {
@@ -25,9 +27,9 @@ public class OpcionesMenuScript : MonoBehaviour
                 indiceResolucionActual = i;
             }
         }
-        bttnDropownResolucion.AddOptions(opciones);
-        bttnDropownResolucion.value = indiceResolucionActual;
-        bttnDropownResolucion.RefreshShownValue();
+        bttnDropdownResolucion.AddOptions(opciones);
+        bttnDropdownResolucion.value = indiceResolucionActual;
+        bttnDropdownResolucion.RefreshShownValue();
     }
     public void establecerResolucion(int iIndiceResolucion) {
         Resolution resolucion = arrayResoluciones[iIndiceResolucion];
