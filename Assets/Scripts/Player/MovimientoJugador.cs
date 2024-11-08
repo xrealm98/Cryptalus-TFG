@@ -47,12 +47,6 @@ public class MovimientoJugador : MonoBehaviour
             ultimoVectorVertical = direccionMovimiento.y;
         }
        
-        if (Input.GetMouseButtonDown(0))
-        {
-        
-            am.SetTrigger("Ataque1");
-
-        }
     }
 
     void movimiento() { 
