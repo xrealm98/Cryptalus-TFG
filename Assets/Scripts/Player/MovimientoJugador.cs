@@ -1,57 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovimientoJugador : MonoBehaviour
 {
-    public float velocidadJugador;
-    Rigidbody2D rb;
-    [HideInInspector]
-    public float ultimoVectorHorizontal, ultimoVectorVertical;
-    [HideInInspector]
-    public Vector2 direccionMovimiento;
-    Animator am;
-    private int m_currentAttack = 0;
-    private float m_timeSinceAttack = 0.0f;
+    private Vector2 movimiento;
+    private Rigidbody2D rb;
+    private Animator am;
+    SpriteRenderer sr;
+    private GameObject hitbox;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public float velocidadJugador = 5;
+    private bool mirandoDerecha = true;
+
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
-    }
+        sr = GetComponent<SpriteRenderer>();
+        hitbox = transform.Find("HitboxGolpe").gameObject;
 
-    // Update is called once per frame
-    void Update()
+    }
+    private void OnMovimiento(InputValue value)
     {
-        tomarInputs();
+       movimiento = value.Get<Vector2>().normalized;
+
+       // Verificar dirección para orientar el rango de ataque y sprite.
+       if (movimiento.x != 0)
+       {
+            // Cambiar la orientación de la hitbox
+            flipHitBox(movimiento.x);
+            // Flip del sprite
+            flipSprite(movimiento.x);
+        }
+ 
     }
 
-    // Se usa fixedupdate, ya que este método no depende del ratio de frames.
-    private void FixedUpdate()
+    public void FixedUpdate() {
+        // Movimiento y velocidad.
+        rb.MovePosition(rb.position + movimiento * velocidadJugador * Time.fixedDeltaTime);
+        am.SetBool("movimiento", movimiento.magnitude > 0);
+    }
+
+    public void flipHitBox(float direccionX)
     {
-        movimiento();
-    }
 
-    void tomarInputs() {
-        float movX = Input.GetAxisRaw("Horizontal");
-        float movY = Input.GetAxisRaw("Vertical");
-        direccionMovimiento = new Vector2(movX,movY).normalized;
-        
-        if (direccionMovimiento.x != 0) 
+        if ((direccionX > 0 && !mirandoDerecha) || (direccionX < 0 && mirandoDerecha))
         {
-            ultimoVectorHorizontal = direccionMovimiento.x;
+            mirandoDerecha = !mirandoDerecha;
+            // Guardamos la posición de la hitbox
+            Vector3 posicionHitbox = hitbox.transform.localPosition;
+            // Cambiar la posición en X de la hitbox
+            posicionHitbox.x *= -1; 
+            hitbox.transform.localPosition = posicionHitbox;
         }
-        if (direccionMovimiento.y != 0)
-        {
-            ultimoVectorVertical = direccionMovimiento.y;
-        }
-       
+
     }
-
-    void movimiento() { 
-        rb.velocity = new Vector2(direccionMovimiento.x * velocidadJugador, direccionMovimiento.y * velocidadJugador);
-
+    private void flipSprite(float direccionX)
+    {
+        sr.flipX = direccionX < 0;
     }
 
 }

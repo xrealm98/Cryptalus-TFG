@@ -9,16 +9,23 @@ public class CombateJugador : MonoBehaviour
     public Transform puntoAtaque;
     public LayerMask layerEnemigos;
 
+
+    public float vidaMax = 100;
+    public float vidaActual;
     public float rangoAtaque = 0.5f;
     public int dañoAtaque = 40;
     public float velocidadAtaque = 2f;
     float tiempoProximoAtaque = 0f;
 
+    private void Start()
+    {
+        am = GetComponent<Animator>();
+        vidaActual = vidaMax;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        am = GetComponent<Animator>();
-
         if (Time.time >= tiempoProximoAtaque) {
 
             if (Input.GetMouseButtonDown(0))
@@ -40,6 +47,26 @@ public class CombateJugador : MonoBehaviour
             enemigo.GetComponent<Enemigo>().recibirDaño(dañoAtaque);
         }
     }
+    public void recibirDaño(int daño)
+    {
+        vidaActual -= daño;
+
+        am.SetTrigger("recibirGolpe");
+
+        if (vidaActual <= 0)
+        {
+            muertePlayer();
+        }
+
+    }
+
+    void muertePlayer()
+    {
+        am.SetBool("estaMuerto", true);
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (puntoAtaque == null)
