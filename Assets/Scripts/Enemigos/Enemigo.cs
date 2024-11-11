@@ -10,7 +10,7 @@ public class Enemigo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        am = GetComponent<Animator>();
+        am = GetComponentInChildren<Animator>();
         vidaActual = vidaMaxima;
 
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.SceneManagement;
 
 public class CombateJugador : MonoBehaviour
 {
@@ -64,7 +65,9 @@ public class CombateJugador : MonoBehaviour
     {
         am.SetBool("estaMuerto", true);
         GetComponent<Collider2D>().enabled = false;
+        SceneManager.LoadScene("Menu Principal");
         this.enabled = false;
+        
     }
 
     private void OnDrawGizmosSelected()
