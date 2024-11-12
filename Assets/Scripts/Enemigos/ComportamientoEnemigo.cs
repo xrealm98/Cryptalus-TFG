@@ -19,14 +19,17 @@ public class ComportamientoEnemigo : MonoBehaviour
     public float velocidadAtaque = 2f;
     float tiempoProximoAtaque = 3f;
     public float rangoAtaque = 1.25f;
+   
+    
     private bool mirandoDerecha = true;
-
     public float distanciaProximoPunto = 1.5f;
     Path path;
     int puntoActual;
     bool puntoAlcanzado = false;
     Seeker seeker;
     Rigidbody2D rb;
+
+    private float posicionInicialXHitbox;
 
     void Start()
     {
@@ -36,6 +39,8 @@ public class ComportamientoEnemigo : MonoBehaviour
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+
+        posicionInicialXHitbox = hitbox.transform.localPosition.x;
 
         InvokeRepeating("actualizarCamino", 0f, .5f);
         
@@ -144,11 +149,11 @@ public class ComportamientoEnemigo : MonoBehaviour
         if ((direccionX > 0 && !mirandoDerecha) || (direccionX < 0 && mirandoDerecha))
         {
             mirandoDerecha = !mirandoDerecha;
-            // Guardamos la posición de la hitbox
-            Vector3 posicionHitbox = hitbox.transform.localPosition;
-            // Cambiar la posición en X de la hitbox
-            posicionHitbox.x *= -1;
-            hitbox.transform.localPosition = posicionHitbox;
+
+            // Restauramos la posición inicial de la hitbox en X y la invertimos según la dirección
+            hitbox.transform.localPosition = new Vector3(posicionInicialXHitbox * (mirandoDerecha ? 1 : -15),
+                                                         hitbox.transform.localPosition.y,
+                                                         hitbox.transform.localPosition.z);
         }
 
     }

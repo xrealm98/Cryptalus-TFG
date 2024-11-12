@@ -9,7 +9,7 @@ public class CombateJugador : MonoBehaviour
     public Animator am;
     public Transform puntoAtaque;
     public LayerMask layerEnemigos;
-
+    public BarraVida barraVida;
 
     public float vidaMax = 100;
     public float vidaActual;
@@ -22,6 +22,7 @@ public class CombateJugador : MonoBehaviour
     {
         am = GetComponent<Animator>();
         vidaActual = vidaMax;
+        barraVida.SetVidaMaxima(vidaMax);
     }
 
     // Update is called once per frame
@@ -52,6 +53,8 @@ public class CombateJugador : MonoBehaviour
     {
         vidaActual -= daño;
 
+        barraVida.SetVida(vidaActual);
+
         am.SetTrigger("recibirGolpe");
 
         if (vidaActual <= 0)
@@ -65,7 +68,7 @@ public class CombateJugador : MonoBehaviour
     {
         am.SetBool("estaMuerto", true);
         GetComponent<Collider2D>().enabled = false;
-        SceneManager.LoadScene("Menu Principal");
+        //SceneManager.LoadScene("Menu Principal");
         this.enabled = false;
         
     }

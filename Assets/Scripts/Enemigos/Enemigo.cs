@@ -5,19 +5,22 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour
 {
     public Animator am;
-    public int vidaMaxima = 100;
+    public int vidaMax = 100;
     int vidaActual;
-    // Start is called before the first frame update
+    public BarraVida barraVida;
+
     void Start()
     {
         am = GetComponentInChildren<Animator>();
-        vidaActual = vidaMaxima;
+        vidaActual = vidaMax;
+        barraVida.SetVidaMaxima(vidaMax);
 
     }
     public void recibirDaño(int daño)
     {
         vidaActual -= daño;
 
+        barraVida.SetVida(vidaActual);
         am.SetTrigger("recibirGolpe");
 
         if (vidaActual <= 0)
