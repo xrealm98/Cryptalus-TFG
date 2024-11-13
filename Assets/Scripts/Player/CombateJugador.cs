@@ -70,6 +70,7 @@ public class CombateJugador : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         //SceneManager.LoadScene("Menu Principal");
         this.enabled = false;
+        GetComponent<MovimientoJugador>().enabled = false;  
         
     }
 
