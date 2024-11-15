@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
     public Animator am;
-    public int vidaMax = 100;
-    int vidaActual;
+    public float vidaMax = 100;
+    float vidaActual;
     public BarraVida barraVida;
 
     void Start()
@@ -16,9 +17,12 @@ public class Enemigo : MonoBehaviour
         barraVida.SetVidaMaxima(vidaMax);
 
     }
-    public void recibirDaño(int daño)
+    public void recibirDamage(float damage)
     {
-        vidaActual -= daño;
+        // daño -= stats.armadura.Valor;
+        damage = Mathf.Clamp(damage, 0, float.MaxValue);
+       
+        vidaActual -= damage;
 
         barraVida.SetVida(vidaActual);
         am.SetTrigger("recibirGolpe");

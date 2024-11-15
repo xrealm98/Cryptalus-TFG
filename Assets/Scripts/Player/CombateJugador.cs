@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
@@ -11,19 +12,21 @@ public class CombateJugador : MonoBehaviour
     public LayerMask layerEnemigos;
     public BarraVida barraVida;
 
-    public float vidaMax = 100;
+    public EstadisticasPlayer stats;
+
     public float vidaActual;
-    public float rangoAtaque = 0.5f;
-    public int dañoAtaque = 40;
-    public float velocidadAtaque = 2f;
+    public float rangoAtaque;
+    
     float tiempoProximoAtaque = 0f;
 
     private void Start()
     {
         am = GetComponent<Animator>();
-        vidaActual = vidaMax;
-        barraVida.SetVidaMaxima(vidaMax);
-    }
+        stats = GetComponent<EstadisticasPlayer>();
+        vidaActual = stats.vida.Valor;
+        barraVida.SetVidaMaxima(stats.vida.Valor);
+        rangoAtaque = stats.rangoAtaque.Valor;
+}
 
     // Update is called once per frame
     void Update()
@@ -33,7 +36,7 @@ public class CombateJugador : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 ataque();
-                tiempoProximoAtaque = Time.time + 1f / velocidadAtaque;
+                tiempoProximoAtaque = Time.time + 1f / stats.velocidadAtaque.Valor;
 
             }
         }
@@ -43,16 +46,23 @@ public class CombateJugador : MonoBehaviour
         am.SetTrigger("Ataque1");
 
         // Detectar enemigos en rango de ataque
-        Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoAtaque.position, rangoAtaque, layerEnemigos);
+        Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoAtaque.position, stats.rangoAtaque.Valor, layerEnemigos);
 
         foreach (Collider2D enemigo in enemigosGolpeados) {
-            enemigo.GetComponent<Enemigo>().recibirDaño(dañoAtaque);
+            Enemigo enemigoComponent = enemigo.GetComponent<Enemigo>();
+            if (enemigoComponent != null)
+            {
+                enemigoComponent.recibirDamage(stats.ataque.Valor);
+            }
         }
     }
-    public void recibirDaño(int daño)
-    {
-        vidaActual -= daño;
 
+    public void recibirDamage(float damage)
+    {
+        damage -= stats.armadura.Valor;
+        damage = Mathf.Clamp(damage, 0, float.MaxValue);
+        vidaActual -= damage;
+     
         barraVida.SetVida(vidaActual);
 
         am.SetTrigger("recibirGolpe");

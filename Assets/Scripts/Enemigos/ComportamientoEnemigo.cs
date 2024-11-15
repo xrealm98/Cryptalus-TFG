@@ -15,7 +15,7 @@ public class ComportamientoEnemigo : MonoBehaviour
     public LayerMask layerPlayer;
 
     public float velocidadEnemigo = 600;
-    public int dañoAtaque = 40;
+    public float dañoAtaque = 40;
     public float velocidadAtaque = 2f;
     float tiempoProximoAtaque = 3f;
     public float rangoAtaque = 1.25f;
@@ -139,7 +139,7 @@ public class ComportamientoEnemigo : MonoBehaviour
 
         foreach (Collider2D enemigo in enemigosGolpeados)
         {
-            enemigo.GetComponent<CombateJugador>().recibirDaño(dañoAtaque);
+            enemigo.GetComponent<CombateJugador>().recibirDamage(dañoAtaque);
         }
     }
 

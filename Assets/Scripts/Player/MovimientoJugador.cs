@@ -10,14 +10,17 @@ public class MovimientoJugador : MonoBehaviour
     private Animator am;
     SpriteRenderer sr;
     private GameObject hitbox;
-
-    public float velocidadJugador = 5;
     private bool mirandoDerecha = true;
+
+
+    public EstadisticasPlayer stats;
+
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        stats = GetComponent<EstadisticasPlayer>();
         hitbox = transform.Find("HitboxGolpe").gameObject;
 
     }
@@ -38,7 +41,7 @@ public class MovimientoJugador : MonoBehaviour
 
     public void FixedUpdate() {
         // Movimiento y velocidad.
-        rb.MovePosition(rb.position + movimiento * velocidadJugador * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movimiento * stats.velocidadMovimiento.Valor * Time.fixedDeltaTime);
         am.SetBool("movimiento", movimiento.magnitude > 0);
     }
 

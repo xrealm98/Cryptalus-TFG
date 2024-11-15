@@ -51,14 +51,14 @@ public class Trampas : MonoBehaviour
         {
             if (objeto.CompareTag("Player"))
             {
-                objeto.GetComponent<CombateJugador>().recibirDaño(damage);
+                objeto.GetComponent<CombateJugador>().recibirDamage(damage);
             }
             else{
                 Enemigo enemigo = objeto.GetComponent<Enemigo>();
                 
                 if (enemigo != null)
                 {
-                    enemigo.recibirDaño(damage);
+                    enemigo.recibirDamage(damage);
 
                 }
             }
