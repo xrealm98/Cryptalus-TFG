@@ -14,7 +14,7 @@ public class EstadisticasPlayer : MonoBehaviour
     public EstadisticasBase velocidadMovimiento;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ataque = new EstadisticasBase(40);
         vida = new EstadisticasBase(100);
@@ -24,7 +24,7 @@ public class EstadisticasPlayer : MonoBehaviour
         velocidadAtaque = new EstadisticasBase(2f);
         velocidadMovimiento = new EstadisticasBase(5);
        // ataque.addModificador(new ModificadorEstadisticas(0.2f, TipoModificadorEstadistica.Porcentaje));
-       // Debug.Log(ataque.Valor);
+        Debug.Log(vida.Valor);
     }
 
 

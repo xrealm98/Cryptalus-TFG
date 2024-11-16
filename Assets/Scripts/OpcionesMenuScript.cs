@@ -4,15 +4,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class OpcionesMenuScript : MonoBehaviour
 {
     public AudioMixer audioMixer;
 
     Resolution[] arrayResoluciones;
-
+    private const string ESCENA_MENU_PRINCIPAL = "Menu Principal";
     public TMP_Dropdown  bttnDropdownResolucion;
+
 
     private void Start()
     {
@@ -46,5 +47,13 @@ public class OpcionesMenuScript : MonoBehaviour
     public void establecerCalidad(int indiceCalidad) {
         QualitySettings.SetQualityLevel(indiceCalidad);
     }
-    
+
+    public void VolverEscena()
+    {
+            SceneManager.LoadScene(ESCENA_MENU_PRINCIPAL);
+     }
+
+
 }
+
+

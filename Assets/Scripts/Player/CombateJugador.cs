@@ -23,6 +23,7 @@ public class CombateJugador : MonoBehaviour
     {
         am = GetComponent<Animator>();
         stats = GetComponent<EstadisticasPlayer>();
+        Debug.Log(stats.vida.ValorBase);
         vidaActual = stats.vida.Valor;
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
