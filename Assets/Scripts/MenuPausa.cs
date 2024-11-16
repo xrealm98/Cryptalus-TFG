@@ -7,13 +7,15 @@ public class MenuPausa : MonoBehaviour
 {
     public static bool JuegoPausado = false;
     private const string ESCENA_MENU_PRINCIPAL = "Menu Principal";
-    private const string ESCENA_OPCIONES = "Opciones";
+
     public GameObject InterfazPausa;
-  
+    public GameObject InterfazOpciones;
+
 
     void Awake()
     {
         InterfazPausa.SetActive(false);
+        InterfazOpciones.SetActive(false);
         Time.timeScale = 1f;
         JuegoPausado = false;
 
@@ -34,6 +36,7 @@ public class MenuPausa : MonoBehaviour
 
     public void VolverAPartida() {
         InterfazPausa.SetActive(false);
+        InterfazOpciones.SetActive(false);
         Time.timeScale = 1f;
         JuegoPausado = false;
 
@@ -41,7 +44,7 @@ public class MenuPausa : MonoBehaviour
 
     public void IrAOpciones()
     {
-        //SceneManager.LoadScene(ESCENA_OPCIONES);
+        InterfazOpciones.SetActive(true);
     }
 
     public void GuardarPartida()
@@ -65,6 +68,7 @@ public class MenuPausa : MonoBehaviour
 
     void pausar() {
         InterfazPausa.SetActive(true);
+        InterfazOpciones.SetActive(false);
         Time.timeScale = 0f;
         JuegoPausado=true;
 

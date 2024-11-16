@@ -13,7 +13,9 @@ public class OpcionesMenuScript : MonoBehaviour
     Resolution[] arrayResoluciones;
     private const string ESCENA_MENU_PRINCIPAL = "Menu Principal";
     public TMP_Dropdown  bttnDropdownResolucion;
-
+    
+    public GameObject InterfazPausa;
+    public GameObject InterfazOpciones;
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class OpcionesMenuScript : MonoBehaviour
         bttnDropdownResolucion.RefreshShownValue();
     }
     public void establecerResolucion(int iIndiceResolucion) {
+        Debug.Log("Entro");
         Resolution resolucion = arrayResoluciones[iIndiceResolucion];
         Screen.SetResolution(resolucion.width, resolucion.height, Screen.fullScreen);
     }
@@ -41,7 +44,8 @@ public class OpcionesMenuScript : MonoBehaviour
         audioMixer.SetFloat("volumen", volumen);
         Debug.Log(volumen);
     }
-    public void bttnPantallaCompleta(bool bEstaFull) { 
+    public void bttnPantallaCompleta(bool bEstaFull) {
+        Debug.Log("Entro");
         Screen.fullScreen = bEstaFull;
     }
     public void establecerCalidad(int indiceCalidad) {
@@ -50,10 +54,24 @@ public class OpcionesMenuScript : MonoBehaviour
 
     public void VolverEscena()
     {
+        string escenaActual = SceneManager.GetActiveScene().name;
+      
+        // Verificar si estamos en el menú de pausa o en el menú principal
+        if (escenaActual == "Opciones")
+        {
             SceneManager.LoadScene(ESCENA_MENU_PRINCIPAL);
-     }
+         
+           
+        } else {
+            Debug.Log("Entro");
+            InterfazOpciones.SetActive(false);
+            InterfazPausa.SetActive(true); 
 
-
+        }
+    }
 }
+
+
+
 
 
