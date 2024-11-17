@@ -72,6 +72,7 @@ public class Trampas : MonoBehaviour
         Collider2D[] objetosEnRango = Physics2D.OverlapCircleAll(transform.position, 1f);
         foreach (Collider2D objeto in objetosEnRango)
         {
+            Debug.Log($"Objeto detectado: {objeto.name}");
             if (objeto.CompareTag("Player") || objeto.GetComponent<Enemigo>() != null)
             {
                 return true;

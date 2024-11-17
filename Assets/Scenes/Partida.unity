@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524160158}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10fae662ba3f8954fa5406ac7fd1fbbd, type: 3}
   m_Name: 
@@ -1302,11 +1302,11 @@ MonoBehaviour:
   layerPlayer:
     serializedVersion: 2
     m_Bits: 64
-  velocidadEnemigo: 200
+  velocidadEnemigo: 400
   "da\xF1oAtaque": 40
   velocidadAtaque: 2
   rangoAtaque: 0.75
-  distanciaProximoPunto: 1.75
+  distanciaProximoPunto: 1
 --- !u!114 &524160168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2963,7 +2963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdf46a15702c83498e2eeff6b50dfc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   tiempoEntreActivaciones: 2
 --- !u!61 &1057965514
 BoxCollider2D:

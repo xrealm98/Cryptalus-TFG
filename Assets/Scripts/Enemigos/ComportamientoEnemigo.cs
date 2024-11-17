@@ -14,7 +14,7 @@ public class ComportamientoEnemigo : MonoBehaviour
     Animator am;
     public LayerMask layerPlayer;
 
-    public float velocidadEnemigo = 600;
+    public float velocidadEnemigo = 600f;
     public float dañoAtaque = 40;
     public float velocidadAtaque = 2f;
     float tiempoProximoAtaque = 3f;
@@ -22,7 +22,7 @@ public class ComportamientoEnemigo : MonoBehaviour
    
     
     private bool mirandoDerecha = true;
-    public float distanciaProximoPunto = 1.5f;
+    public float distanciaProximoPunto = 1f;
     Path path;
     int puntoActual;
     bool puntoAlcanzado = false;
