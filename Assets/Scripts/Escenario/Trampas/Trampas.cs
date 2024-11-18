@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trampas : MonoBehaviour
 {
-    [SerializeField] private int damage;
+    [SerializeField] private int damage; 
     [SerializeField] private float tiempoEntreActivaciones = 2f;
     Animator am;
     private float tiempoActual = 0f;
@@ -16,15 +16,12 @@ public class Trampas : MonoBehaviour
     }
     private void Update()
     {
-        if (estaDentro && tiempoActual <= 0f)
+        // Reducir el contador de tiempo
+        if (tiempoActual > 0f)
         {
-            am.SetBool("contacto", true);
-            tiempoActual = tiempoEntreActivaciones; 
+            tiempoActual -= Time.deltaTime;
         }
-        else
-        {
-            tiempoActual -= Time.deltaTime; 
-        }
+  
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,7 +40,16 @@ public class Trampas : MonoBehaviour
         }
 
     }
-  
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if ((collision.CompareTag("Player") || collision.GetComponent<Enemigo>() != null) && tiempoActual <= 0f){
+            am.SetBool("contacto", true);
+            tiempoActual = tiempoEntreActivaciones;
+        } 
+
+    }
+
+
     private void ActivarTrampa()
     {
         Collider2D[] objetosEnRango = Physics2D.OverlapCircleAll(transform.position, 1f);

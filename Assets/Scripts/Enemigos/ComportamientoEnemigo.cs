@@ -60,6 +60,11 @@ public class ComportamientoEnemigo : MonoBehaviour
         }
     
     }
+    void Update()
+    {
+        // Para que no se duerma el objeto
+        rb.AddForce(Vector2.zero);
+    }
 
 
     void FixedUpdate()

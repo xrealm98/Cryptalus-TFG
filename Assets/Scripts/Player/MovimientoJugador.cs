@@ -38,6 +38,10 @@ public class MovimientoJugador : MonoBehaviour
         }
  
     }
+    void Update()
+    {
+        rb.AddForce(Vector2.zero);
+    }
 
     public void FixedUpdate() {
         // Movimiento y velocidad.
