@@ -16,6 +16,7 @@ public class CombateJugador : MonoBehaviour
 
     public float vidaActual;
     public float rangoAtaque;
+    public int monedas;
     
     float tiempoProximoAtaque = 0f;
 
@@ -23,7 +24,7 @@ public class CombateJugador : MonoBehaviour
     {
         am = GetComponent<Animator>();
         stats = GetComponent<EstadisticasPlayer>();
-        Debug.Log(stats.vida.ValorBase);
+        //Debug.Log(stats.vida.ValorBase);
         vidaActual = stats.vida.Valor;
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
@@ -78,6 +79,7 @@ public class CombateJugador : MonoBehaviour
     void muertePlayer()
     {
         am.SetBool("estaMuerto", true);
+        MonedasManager.instancia.guardarMonedas();
         GetComponent<Collider2D>().enabled = false;
         //SceneManager.LoadScene("Menu Principal");
         this.enabled = false;

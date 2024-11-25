@@ -54,6 +54,7 @@ public class MenuPausa : MonoBehaviour
     public void VolverAlMenu()
     {
         Debug.Log("Cargando menu");
+        MonedasManager.instancia.guardarMonedas();
         Time.timeScale = 1f; 
         JuegoPausado = false;
         InterfazPausa.SetActive(false);

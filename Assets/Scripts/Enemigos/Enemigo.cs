@@ -35,6 +35,7 @@ public class Enemigo : MonoBehaviour
     }
     void muerteEnemigo() {
         am.SetBool("estaMuerto", true);
+        MonedasManager.instancia.AddMonedas(2);
         GetComponent<Collider2D>().enabled = false;  
         this.enabled = false;
     }
