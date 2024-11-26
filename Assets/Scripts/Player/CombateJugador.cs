@@ -79,7 +79,7 @@ public class CombateJugador : MonoBehaviour
     void muertePlayer()
     {
         am.SetBool("estaMuerto", true);
-        MonedasManager.instancia.guardarMonedas();
+        GuardadoManager.instancia.GuardarDatos();
         GetComponent<Collider2D>().enabled = false;
         //SceneManager.LoadScene("Menu Principal");
         this.enabled = false;

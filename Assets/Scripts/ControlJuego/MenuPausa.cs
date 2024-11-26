@@ -29,7 +29,7 @@ public class MenuPausa : MonoBehaviour
                 VolverAPartida();
             }
             else {
-                pausar();
+                Pausar();
             }
         }   
     }
@@ -54,7 +54,7 @@ public class MenuPausa : MonoBehaviour
     public void VolverAlMenu()
     {
         Debug.Log("Cargando menu");
-        MonedasManager.instancia.guardarMonedas();
+        GuardadoManager.instancia.GuardarDatos();
         Time.timeScale = 1f; 
         JuegoPausado = false;
         InterfazPausa.SetActive(false);
@@ -67,7 +67,7 @@ public class MenuPausa : MonoBehaviour
         Application.Quit();
     }
 
-    void pausar() {
+    void Pausar() {
         InterfazPausa.SetActive(true);
         InterfazOpciones.SetActive(false);
         Time.timeScale = 0f;
