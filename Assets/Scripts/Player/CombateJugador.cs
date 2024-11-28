@@ -14,6 +14,7 @@ public class CombateJugador : MonoBehaviour
 
     public EstadisticasPlayer stats;
 
+    public float vidaMaxima;
     public float vidaActual;
     public float rangoAtaque;
     public int monedas;
@@ -24,8 +25,9 @@ public class CombateJugador : MonoBehaviour
     {
         am = GetComponent<Animator>();
         stats = GetComponent<EstadisticasPlayer>();
-        //Debug.Log(stats.vida.ValorBase);
+
         vidaActual = stats.vida.Valor;
+        vidaMaxima = stats.vida.Valor;
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
 }
@@ -73,6 +75,12 @@ public class CombateJugador : MonoBehaviour
         {
             muertePlayer();
         }
+
+    }
+
+    public void curarVida(float cantidad) {
+        vidaActual = Mathf.Clamp(vidaActual + cantidad, 0, vidaMaxima);
+        barraVida.SetVida(vidaActual);
 
     }
 
