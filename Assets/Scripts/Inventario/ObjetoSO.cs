@@ -13,13 +13,19 @@ public class ObjetoSO : ScriptableObject
     public float cantidadModificadorAtributo;
 
 
-    public void UsarObjeto() {
-        Debug.Log("Uso objeto");
-
-        if (estadisticaACambiar == EstadisticaACambiar.vida) {
-            GameObject.Find("Player").GetComponent<CombateJugador>().curarVida(cantidadModificadorEstadistica);
+    public bool UsarObjeto() {
         
+        CombateJugador combateJugador = GameObject.Find("Player").GetComponent<CombateJugador>();
+        if (estadisticaACambiar == EstadisticaACambiar.vida) {
+           if(combateJugador.vidaActual == combateJugador.vidaMaxima) {
+                return false;
+           }
+           else{ 
+                combateJugador.curarVida(cantidadModificadorEstadistica);
+                return true;
+           }
         }
+        return false;
     
     
     }
