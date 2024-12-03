@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EstadisticasPlayer : MonoBehaviour
 {
+    [SerializeField]
+    private TMP_Text textoAtaque, textoVida, textoArmadura;
+
 
     public EstadisticasBase ataque;
     public EstadisticasBase vida;
@@ -41,6 +45,19 @@ public class EstadisticasPlayer : MonoBehaviour
         velocidadMovimiento = new EstadisticasBase(5);
         // ataque.addModificador(new ModificadorEstadisticas(0.2f, TipoModificadorEstadistica.Porcentaje));
         Debug.Log("Estadísticas cargadas: Vida=" + vida.Valor + ", Armadura=" + armadura.Valor + ", Ataque=" + ataque.Valor);
+    }
+
+    private void Start()
+    {
+        ActualizarEstadistasEquipamiento();
+
+    }
+
+    public void ActualizarEstadistasEquipamiento() {
+        textoAtaque.text = ataque.Valor.ToString();
+        textoVida.text = vida.Valor.ToString();
+        textoArmadura.text = armadura.Valor.ToString();
+
     }
 
 

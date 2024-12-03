@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -167,13 +167,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreObjeto: 
   cantidad: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   descripcionObjeto: 
   estaLleno: 0
-  spriteRanuraVacia: {fileID: 0}
+  spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
-  textoCantidad: {fileID: 0}
   imagenObjeto: {fileID: 5182641889171257596}
+  ranuraCabeza: {fileID: 0}
+  ranuraCuerpo: {fileID: 0}
+  ranuraGuantes: {fileID: 0}
+  ranuraBotas: {fileID: 0}
+  ranuraAccesorio: {fileID: 0}
+  ranuraManoPrincipal: {fileID: 0}
+  ranuraManoSecundaria: {fileID: 0}
   objetoSeleccionado: {fileID: 3834794330739156756}
   estaSeleccionadoObjeto: 0
 --- !u!1 &6405861196120925911
@@ -235,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

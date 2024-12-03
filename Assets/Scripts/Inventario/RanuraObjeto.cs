@@ -130,7 +130,8 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
         nuevoObjeto.cantidad = 1;
         nuevoObjeto.nombreObjeto = nombreObjeto;
         nuevoObjeto.sprite = sprite;
-        nuevoObjeto.descripcionObjeto = descripcionObjeto;  
+        nuevoObjeto.descripcionObjeto = descripcionObjeto;
+        nuevoObjeto.tipoObjeto = tipoObjeto;
 
         SpriteRenderer sr = objetoATirar.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
