@@ -6,7 +6,7 @@ using UnityEngine;
 public class EstadisticasPlayer : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text textoAtaque, textoVida, textoArmadura;
+    private TMP_Text textoNivel, textoAtaque, textoVida, textoArmadura;
 
 
     public EstadisticasBase ataque;
@@ -16,11 +16,18 @@ public class EstadisticasPlayer : MonoBehaviour
     public EstadisticasBase rangoAtaque;
     public EstadisticasBase velocidadAtaque;
     public EstadisticasBase velocidadMovimiento;
+    public int nivelPlayer;
+    public int puntosExperienciaActual;
+    public int maximoPuntosNivel = 100;
 
-    // Start is called before the first frame update
+   
     void Awake()
     {
         DatosGuardados datos = GuardadoManager.instancia.CargarDatos();
+
+        nivelPlayer = 1;
+        puntosExperienciaActual = 0;
+        maximoPuntosNivel = 100;
 
         if (datos != null && datos.ataqueBase !=0)
         {
@@ -47,9 +54,40 @@ public class EstadisticasPlayer : MonoBehaviour
         Debug.Log("Estadísticas cargadas: Vida=" + vida.Valor + ", Armadura=" + armadura.Valor + ", Ataque=" + ataque.Valor);
     }
 
+
     private void Start()
     {
+
         ActualizarEstadistasEquipamiento();
+
+    }
+
+    public void GanarExperiencia(int puntosExperiencia)
+    {
+        puntosExperienciaActual += puntosExperiencia;
+
+        // Manejamos el nivel en funcion de los puntos recibidos.
+        while (puntosExperienciaActual >= maximoPuntosNivel)
+        {
+            puntosExperienciaActual -= maximoPuntosNivel;
+            SubirNivel();
+        }
+
+        ActualizarEstadistasEquipamiento();
+    }
+
+
+    public void SubirNivel() {
+        nivelPlayer++;
+        maximoPuntosNivel = Mathf.RoundToInt(maximoPuntosNivel * 1.5f); 
+        
+        Debug.Log($"¡Subiste al nivel {nivelPlayer}!");
+
+
+        vida.addModificador(new ModificadorEstadisticas(10, TipoModificadorEstadistica.Plano, this));
+        ataque.addModificador(new ModificadorEstadisticas(2, TipoModificadorEstadistica.Plano, this));
+        armadura.addModificador(new ModificadorEstadisticas(1, TipoModificadorEstadistica.Plano, this));
+        
 
     }
 
@@ -57,6 +95,7 @@ public class EstadisticasPlayer : MonoBehaviour
         textoAtaque.text = ataque.Valor.ToString();
         textoVida.text = vida.Valor.ToString();
         textoArmadura.text = armadura.Valor.ToString();
+        textoNivel.text = nivelPlayer.ToString();
 
     }
 

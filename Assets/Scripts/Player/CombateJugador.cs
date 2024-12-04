@@ -56,7 +56,7 @@ public class CombateJugador : MonoBehaviour
             Enemigo enemigoComponent = enemigo.GetComponent<Enemigo>();
             if (enemigoComponent != null)
             {
-                enemigoComponent.recibirDamage(stats.ataque.Valor);
+                enemigoComponent.RecibirDamage(stats.ataque.Valor);
             }
         }
     }

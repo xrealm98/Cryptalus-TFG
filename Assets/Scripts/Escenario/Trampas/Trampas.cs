@@ -64,7 +64,7 @@ public class Trampas : MonoBehaviour
                 
                 if (enemigo != null)
                 {
-                    enemigo.recibirDamage(damage);
+                    enemigo.RecibirDamage(damage);
 
                 }
             }

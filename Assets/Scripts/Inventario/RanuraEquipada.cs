@@ -15,7 +15,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
     private TMP_Text nombreRanura;
 
     [SerializeField]
-    private TipoObjeto tipoObjeto = new TipoObjeto();
+    private TipoObjeto tipoObjeto = new();
 
     private Sprite spriteObjeto;
     private string nombreObjeto;
@@ -72,7 +72,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
         }
         else
         {
-            inventarioManager.deseleccionarSlots();
+            inventarioManager.DeseleccionarSlots();
             objetoSeleccionado.SetActive(true);
             estaSeleccionadoObjeto = true;
         }
@@ -89,7 +89,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Salgo");
+
         TooltipManager.instancia.OcultarTooltip();
     }
 
@@ -124,7 +124,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     private void DesequiparPieza()
     {
-        inventarioManager.deseleccionarSlots();
+        inventarioManager.DeseleccionarSlots();
         inventarioManager.AddObjeto(nombreObjeto, 1, spriteObjeto, descripcionObjeto, tipoObjeto);
         this.spriteObjeto = spriteVacio;
         imagenRanura.sprite = this.spriteVacio;

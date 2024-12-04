@@ -19,10 +19,6 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
     public Sprite spriteRanuraVacia;
     public TipoObjeto tipoObjeto;
 
-
-    private bool isPointerInside = false;
-
-
     // Información sobre la ranura de objeto.
     [SerializeField]
     private Image imagenObjeto;
@@ -108,7 +104,7 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         }
         else
         {
-            inventarioManager.deseleccionarSlots();
+            inventarioManager.DeseleccionarSlots();
             objetoSeleccionado.SetActive(true);
             estaSeleccionadoObjeto = true;
 

@@ -36,7 +36,6 @@ public class Objeto : MonoBehaviour
         if (jugadorDentroCollider && Input.GetKeyDown(KeyCode.E))
         {
             int objetosSobrantes = inventarioManager.AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
-            Debug.Log("Entrando en colision: " + objetosSobrantes);
             if (objetosSobrantes <= 0)
             {
                 Destroy(gameObject);
@@ -53,7 +52,7 @@ public class Objeto : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             jugadorDentroCollider = true;
         }
@@ -61,7 +60,7 @@ public class Objeto : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             jugadorDentroCollider = false;
         }

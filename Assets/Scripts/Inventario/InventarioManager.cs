@@ -104,7 +104,6 @@ public class InventarioManager : MonoBehaviour
             {
                 if (ranuraObjeto[i].estaLleno == false && ranuraObjeto[i].nombreObjeto == nombreObjeto || ranuraObjeto[i].cantidad == 0)
                 {
-                    Debug.Log("Entro for inventario manager");
                     int objetosSobrantes = ranuraObjeto[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
                     if (objetosSobrantes > 0)
                     {
@@ -122,7 +121,6 @@ public class InventarioManager : MonoBehaviour
             {
                 if (ranuraObjetoEquipamiento[i].estaLleno == false && ranuraObjetoEquipamiento[i].nombreObjeto == nombreObjeto || ranuraObjetoEquipamiento[i].cantidad == 0)
                 {
-                    Debug.Log("Entro for inventario manager");
                     int objetosSobrantes = ranuraObjetoEquipamiento[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
                     if (objetosSobrantes > 0)
                     {
@@ -140,7 +138,7 @@ public class InventarioManager : MonoBehaviour
 
 
     }
-    public void deseleccionarSlots()
+    public void DeseleccionarSlots()
     {
         for (int i = 0; i < ranuraObjeto.Length; i++)
         {

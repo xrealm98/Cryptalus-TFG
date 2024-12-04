@@ -99,7 +99,7 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
             
         }
         else { 
-            inventarioManager.deseleccionarSlots(); 
+            inventarioManager.DeseleccionarSlots(); 
             objetoSeleccionado.SetActive(true);
             estaSeleccionadoObjeto = true;
             imagenObjetoDescripcion.sprite = sprite;

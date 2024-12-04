@@ -8,6 +8,8 @@ public class TooltipManager : MonoBehaviour
     public static TooltipManager instancia;
 
     public BibliotecaEquipoSO bibliotecaEquipoSO;
+    
+    private InventarioManager inventarioManager;
 
     public TMP_Text textoTooltip;
 
@@ -27,6 +29,7 @@ public class TooltipManager : MonoBehaviour
     void Start()
     {
         bibliotecaEquipoSO = GameObject.Find("CanvasInventario").GetComponent<BibliotecaEquipoSO>();
+        inventarioManager = GameObject.Find("CanvasInventario").GetComponent<InventarioManager>();
         Cursor.visible = true;
         gameObject.SetActive(false);
     }
@@ -34,6 +37,11 @@ public class TooltipManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!inventarioManager.MenuInventario.activeSelf && !inventarioManager.MenuEquipamiento.activeSelf)
+        {
+            OcultarTooltip();
+            return;
+        }
         float offsetY = 5f;
         transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y + offsetY);
     }

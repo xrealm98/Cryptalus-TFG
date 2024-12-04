@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4fb12d9afe115b4d954fc9dd928173e, type: 3}
-  m_Name: EspadaBase
+  m_Name: Armadura Metal
   m_EditorClassIdentifier: 
-  nombreObjeto: "Espada b\xE1sica"
-  ataque: 5
-  vida: 5
-  armadura: 5
+  nombreObjeto: Armadura de metal
+  sprite: {fileID: 21300000, guid: cbab2e602df97374d8741da9a0c18b56, type: 3}
+  descripcion: 
+  ataque: 0
+  vida: 0
+  armadura: 30
+  "tama\xF1o": {x: 0.5, y: 0.5, z: 0}
+  tipoObjeto: 3
+  nivelMinimoDrop: 16
+  nivelMaximoDrop: 20
