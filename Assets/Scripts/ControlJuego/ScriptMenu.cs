@@ -12,7 +12,7 @@ public class ScriptMenu : MonoBehaviour
 
     public void btIniciarPartida()
     {
-        SceneManager.LoadScene("Partida");
+        NivelManager.instancia.IniciarPartida();
     }
 
     public void btTienda()

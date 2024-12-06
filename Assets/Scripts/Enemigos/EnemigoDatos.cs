@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoDatos : MonoBehaviour
+[CreateAssetMenu(fileName = "NuevoEnemigoStats", menuName = "Enemigos/Stats")]
+public class EnemigoDatos : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string nombreTipoEnemigo;
+    public float vida;
+    public float ataque;
+    public float armadura;
+    public float velocidadMovimiento;
+    public float velocidadAtaque;
+    public float rangoAtaque;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

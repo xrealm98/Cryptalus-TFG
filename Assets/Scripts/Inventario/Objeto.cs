@@ -43,7 +43,6 @@ public class Objeto : MonoBehaviour
             else
             {
                 cantidad = objetosSobrantes;
-                Debug.Log("Entro else");
             }
         }
 

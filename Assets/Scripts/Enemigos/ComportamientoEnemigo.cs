@@ -14,25 +14,34 @@ public class ComportamientoEnemigo : MonoBehaviour
     Animator am;
     public LayerMask layerPlayer;
 
-    public float velocidadEnemigo = 600f;
-    public float dañoAtaque = 40;
-    public float velocidadAtaque = 2f;
     float tiempoProximoAtaque = 3f;
-    public float rangoAtaque = 1.25f;
-   
-    
+
+    public string nombreEnemigo;
+    public EstadisticasBase vida;
+    public EstadisticasBase ataque;
+    public EstadisticasBase armadura;
+    public EstadisticasBase velocidadMovimiento;
+    public EstadisticasBase velocidadAtaque;
+    public float rangoAtaque;
+
+
     private bool mirandoDerecha = true;
     public float distanciaProximoPunto = 1f;
+    
     Path path;
     int puntoActual;
     bool puntoAlcanzado = false;
     Seeker seeker;
     Rigidbody2D rb;
 
+    public EnemigoDatos enemigoDatosSO;
+    public EstadisticasPlayer estadisticasPlayer;
+
     private float posicionInicialXHitbox;
 
     void Start()
     {
+        estadisticasPlayer = GameObject.Find("Player").GetComponent<EstadisticasPlayer>();
         am = GetComponentInChildren<Animator>();
         objetivo = GameObject.FindGameObjectWithTag("Player").transform;
         hitbox = transform.Find("HitboxGolpe").gameObject;
@@ -42,23 +51,52 @@ public class ComportamientoEnemigo : MonoBehaviour
 
         posicionInicialXHitbox = hitbox.transform.localPosition.x;
 
-        InvokeRepeating("actualizarCamino", 0f, .5f);
-        
+        IniciarEstadisticas();
+        InvokeRepeating("ActualizarCamino", 0f, .5f);
+
 
     }
 
-    void actualizarCamino()
+    public void IniciarEstadisticas()
     {
-       if (seeker.IsDone()) { 
-        seeker.StartPath(rb.position, objetivo.position, caminoCompletado);
+        nombreEnemigo = enemigoDatosSO.nombreTipoEnemigo;
+        vida.ValorBase = enemigoDatosSO.vida;
+        ataque.ValorBase = enemigoDatosSO.ataque;
+        armadura.ValorBase = enemigoDatosSO.armadura;
+        velocidadMovimiento.ValorBase = enemigoDatosSO.velocidadMovimiento;
+        velocidadAtaque.ValorBase = enemigoDatosSO.velocidadAtaque;
+        rangoAtaque = enemigoDatosSO.rangoAtaque;
+
+
+        float calculo = estadisticasPlayer.nivelPlayer * 0.05f;
+
+        ataque.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
+        armadura.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
+        vida.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
+      
+        Debug.Log("Ataque: " + ataque.Valor);
+        Debug.Log("Armadura: " + armadura.Valor);
+        Debug.Log("Vida: " + vida.Valor);
+
+
+    }
+
+
+    void ActualizarCamino()
+    {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, objetivo.position, CaminoCompletado);
         }
     }
 
-    void caminoCompletado(Path p) {
-        if (!p.error) {
+    void CaminoCompletado(Path p)
+    {
+        if (!p.error)
+        {
             path = p;
         }
-    
+
     }
     void Update()
     {
@@ -73,10 +111,11 @@ public class ComportamientoEnemigo : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
             this.enabled = false;
-           
+
         }
 
-        if (path == null) {
+        if (path == null)
+        {
             return;
         }
         if (puntoActual >= path.vectorPath.Count)
@@ -84,43 +123,46 @@ public class ComportamientoEnemigo : MonoBehaviour
             am.SetBool("movimiento", false);
             if (Time.time >= tiempoProximoAtaque)
             {
-                ataque();
-                tiempoProximoAtaque = Time.time + 3f / velocidadAtaque;
+                AtaqueAlJugador();
+                tiempoProximoAtaque = Time.time + 3f / velocidadAtaque.Valor;
             }
             puntoAlcanzado = true;
             return;
         }
-        else {
+        else
+        {
             puntoAlcanzado = false;
         }
 
         Vector2 direccion = ((Vector2)path.vectorPath[puntoActual] - rb.position).normalized;
 
-        Vector2 fuerza = direccion * velocidadEnemigo * Time.deltaTime;
+        Vector2 fuerza = direccion * velocidadMovimiento.Valor * Time.deltaTime;
 
         rb.AddForce(fuerza);
 
         float distancia = Vector2.Distance(rb.position, path.vectorPath[puntoActual]);
 
-        if (distancia < distanciaProximoPunto) {
+        if (distancia < distanciaProximoPunto)
+        {
             puntoActual++;
-        
+
         }
 
-        comprobarMovimiento(fuerza);
-         
+        ComprobarMovimiento(fuerza);
+
     }
 
-    void comprobarMovimiento(Vector2 fuerza) {
+    void ComprobarMovimiento(Vector2 fuerza)
+    {
         if (fuerza.x >= 0.01f)
         {
-            flipHitBox(fuerza.x);
+            FlipHitBox(fuerza.x);
             enemigoGFX.localScale = new Vector3(1f, 1f, 1f);
 
         }
         else if (fuerza.x <= -0.01f)
         {
-            flipHitBox(fuerza.x);
+            FlipHitBox(fuerza.x);
             enemigoGFX.localScale = new Vector3(-1f, 1f, 1f);
 
         }
@@ -134,9 +176,9 @@ public class ComportamientoEnemigo : MonoBehaviour
         }
 
     }
-    void ataque()
+    void AtaqueAlJugador()
     {
-      
+
         am.SetTrigger("Ataque1");
 
         // Detectar enemigos en rango de ataque
@@ -144,11 +186,11 @@ public class ComportamientoEnemigo : MonoBehaviour
 
         foreach (Collider2D enemigo in enemigosGolpeados)
         {
-            enemigo.GetComponent<CombateJugador>().recibirDamage(dañoAtaque);
+            enemigo.GetComponent<CombateJugador>().recibirDamage(ataque.Valor);
         }
     }
 
-    public void flipHitBox(float direccionX)
+    public void FlipHitBox(float direccionX)
     {
 
         if ((direccionX > 0 && !mirandoDerecha) || (direccionX < 0 && mirandoDerecha))

@@ -30,7 +30,7 @@ public class CombateJugador : MonoBehaviour
         vidaMaxima = stats.vida.Valor;
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
-}
+    }
 
     // Update is called once per frame
     void Update()

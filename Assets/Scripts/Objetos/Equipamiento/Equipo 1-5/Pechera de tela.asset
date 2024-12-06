@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Pechera de tela
   m_EditorClassIdentifier: 
   nombreObjeto: Pechera de tela
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 1f36fbfdda9cb654e9791a44f5519f93, type: 3}
   descripcion: 
   ataque: 0
   vida: 3
   armadura: 3
-  "tama\xF1o": {x: 1, y: 1, z: 0}
+  "tama\xF1o": {x: 0.5, y: 0.5, z: 0}
   tipoObjeto: 3
   nivelMinimoDrop: 1
   nivelMaximoDrop: 5
