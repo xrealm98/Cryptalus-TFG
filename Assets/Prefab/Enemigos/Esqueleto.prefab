@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4245565053158878680}
   - component: {fileID: 5944194213612439339}
   - component: {fileID: 2481947014481361427}
+  - component: {fileID: 8907721748018604439}
   m_Layer: 0
   m_Name: EsqueletoGFX
   m_TagString: Untagged
@@ -212,6 +213,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8907721748018604439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247613770233717563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52575a9f4d681654d8383500c151bbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5283823529897432356
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7276332021824692184}
   - component: {fileID: 1700306929315796317}
+  - component: {fileID: 6816452942518962516}
   - component: {fileID: 8250635784169432031}
   - component: {fileID: 8962176170096296786}
   - component: {fileID: 5390894095922530880}
@@ -533,6 +547,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5198163, y: 0.389377}
   m_EdgeRadius: 0
+--- !u!58 &6816452942518962516
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7740856470080653221}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.64190245, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.0543308
 --- !u!50 &8250635784169432031
 Rigidbody2D:
   serializedVersion: 4
@@ -574,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 0}
   vidaMax: 100
+  vidaActual: 0
   barraVida: {fileID: 7098190255764386437}
   estadisticasPlayer: {fileID: 0}
 --- !u!114 &5390894095922530880
@@ -617,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemigoGFX: {fileID: 4245565053158878680}
-  objetivo: {fileID: 0}
+  player: {fileID: 0}
   puntoAtaque: {fileID: 4673069279248808426}
   layerPlayer:
     serializedVersion: 2
@@ -636,6 +686,7 @@ MonoBehaviour:
   rangoAtaque: 0.75
   distanciaProximoPunto: 0.1
   enemigoDatosSO: {fileID: 11400000, guid: 7d242c5df63a32e439debd5b0c0b584d, type: 2}
+  estadisticasPlayer: {fileID: 0}
 --- !u!1 &8840837882591738083
 GameObject:
   m_ObjectHideFlags: 0

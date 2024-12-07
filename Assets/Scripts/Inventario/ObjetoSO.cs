@@ -6,8 +6,15 @@ using UnityEngine;
 public class ObjetoSO : ScriptableObject
 {
     public string nombreObjeto;
+    public Sprite sprite;
+    public string descripcion;
+    public int cantidad;
+    public Vector3 escala = new();
+    public TipoObjeto tipoObjeto;
     public EstadisticaACambiar estadisticaACambiar = new EstadisticaACambiar();
     public float cantidadModificadorEstadistica;
+
+    public TipoDeCambio tipoDeCambio = new TipoDeCambio();
 
     public AtributosACambiar atributosACambiar = new AtributosACambiar();
     public float cantidadModificadorAtributo;
@@ -16,12 +23,21 @@ public class ObjetoSO : ScriptableObject
     public bool UsarObjeto() {
         
         CombateJugador combateJugador = GameObject.Find("Player").GetComponent<CombateJugador>();
+       
         if (estadisticaACambiar == EstadisticaACambiar.vida) {
            if(combateJugador.vidaActual == combateJugador.vidaMaxima) {
                 return false;
            }
-           else{ 
-                combateJugador.curarVida(cantidadModificadorEstadistica);
+           else{
+                if (tipoDeCambio == TipoDeCambio.Porcentual)
+                {
+                    float cantidadCuracion = combateJugador.vidaMaxima * (cantidadModificadorEstadistica / 100f);
+                    combateJugador.curarVida(cantidadCuracion);
+                }
+                else
+                {
+                    combateJugador.curarVida(cantidadModificadorEstadistica);
+                }
                 return true;
            }
         }
@@ -35,6 +51,11 @@ public class ObjetoSO : ScriptableObject
         ninguno,
         vida,
         mana
+    };
+
+    public enum TipoDeCambio { 
+        Plano,
+        Porcentual
     };
 
     public enum AtributosACambiar

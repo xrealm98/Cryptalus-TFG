@@ -19,7 +19,48 @@ public class ItemManager : MonoBehaviour
 
     public void GenerarDrop(Vector3 posicionEnemigo)
     {
-        // Filtramos los objetos según el nivel del jugador.
+        // Determinar si el objeto que caerá será un equipamiento o un consumible. Actualmente 50%/50%.
+        bool esConsumible = Random.Range(0f, 1f) > 0.5f;
+
+        if (esConsumible)
+        {
+            GenerarConsumible(posicionEnemigo);
+        }
+        else {
+            GenerarObjetoEquipamiento(posicionEnemigo);
+        
+        }
+
+    }
+    void GenerarConsumible(Vector3 posicionEnemigo)
+    {
+        // Seleccionamos un consumible aleatorio
+        ObjetoSO consumibleSO = bibliotecaSO.consumibleSO[Random.Range(0, bibliotecaSO.consumibleSO.Length)];
+
+        // Creamos el gameobject para el consumible
+        GameObject nuevoConsumible = Instantiate(objetoPrefab, posicionEnemigo, Quaternion.identity);
+
+        // Asignamos las propiedades al objeto consumible
+        Transform hijoSprite = nuevoConsumible.transform.GetChild(0);
+        SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = consumibleSO.sprite;
+
+        Objeto objeto = nuevoConsumible.GetComponent<Objeto>();
+        if (objeto != null)
+        {
+            objeto.nombreObjeto = consumibleSO.nombreObjeto;
+            objeto.cantidad = Random.Range(1, 4);
+            objeto.sprite = consumibleSO.sprite;
+            objeto.descripcionObjeto = consumibleSO.descripcion;
+            objeto.tipoObjeto = consumibleSO.tipoObjeto;
+        }
+
+        nuevoConsumible.transform.localScale = consumibleSO.escala;
+    }
+
+
+    void GenerarObjetoEquipamiento(Vector3 posicionEnemigo)
+    {
         List<ObjetoEquipamientoSO> objetosFiltrados = FiltrarObjetosPorNivel(estadisticasPlayer.nivelPlayer);
 
         if (objetosFiltrados.Count > 0)
@@ -28,45 +69,40 @@ public class ItemManager : MonoBehaviour
             ObjetoEquipamientoSO objetoSO = objetosFiltrados[Random.Range(0, objetosFiltrados.Count)];
 
             // Generamos el objeto en el nivel.
-            CrearObjetoEquipamiento(objetoSO, posicionEnemigo);
+            // Creamos el gameobject a través de un prefab.
+            GameObject nuevoObjeto = Instantiate(objetoPrefab, posicionEnemigo, Quaternion.identity);
+
+            // Se asigna el nombre
+            nuevoObjeto.name = objetoSO.nombreObjeto;
+
+            // Accedemos al hijo con el SpriteRenderer
+            Transform hijoSprite = nuevoObjeto.transform.GetChild(0);
+
+            // Se verifica si el hijo tiene un SpriteRenderer
+            SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
+
+            spriteRenderer.sprite = objetoSO.sprite;
+
+
+            Objeto objeto = nuevoObjeto.GetComponent<Objeto>();
+            if (objeto != null)
+            {
+                objeto.nombreObjeto = objetoSO.nombreObjeto;
+                objeto.cantidad = 1;
+                objeto.sprite = objetoSO.sprite;
+                objeto.descripcionObjeto = objetoSO.descripcion;
+                objeto.tipoObjeto = objetoSO.tipoObjeto;
+
+            }
+
+            nuevoObjeto.transform.localScale = objetoSO.escala;
         }
         else
         {
             Debug.LogWarning("No se encontraron objetos válidos para el nivel del jugador.");
         }
-    }
 
 
-    void CrearObjetoEquipamiento(ObjetoEquipamientoSO objetoSO, Vector3 posicionEnemigo)
-    {
-
-        // Creamos el gameobject a través de un prefab.
-        GameObject nuevoObjeto = Instantiate(objetoPrefab, posicionEnemigo, Quaternion.identity);
-
-        // Se asigna el nombre
-        nuevoObjeto.name = objetoSO.nombreObjeto;
-
-        // Accedemos al hijo con el SpriteRenderer
-        Transform hijoSprite = nuevoObjeto.transform.GetChild(0);
-
-        // Se verifica si el hijo tiene un SpriteRenderer
-        SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
-
-        spriteRenderer.sprite = objetoSO.sprite;
-      
-
-        Objeto objeto = nuevoObjeto.GetComponent<Objeto>();
-        if (objeto != null)
-        {
-            objeto.nombreObjeto = objetoSO.nombreObjeto;
-            objeto.cantidad = 1;
-            objeto.sprite = objetoSO.sprite;
-            objeto.descripcionObjeto = objetoSO.descripcion;
-            objeto.tipoObjeto = objetoSO.tipoObjeto;
-
-        }
-
-        nuevoObjeto.transform.localScale = objetoSO.tamaño;
 
     }
 

@@ -9,7 +9,7 @@ public class ObjetoEquipamientoSO : ScriptableObject
     public Sprite sprite;
     public string descripcion;
     public float ataque, vida, armadura;
-    public Vector3 tamaño = new();
+    public Vector3 escala = new(1,1,1);
     public TipoObjeto tipoObjeto;
     
     public int nivelMinimoDrop;

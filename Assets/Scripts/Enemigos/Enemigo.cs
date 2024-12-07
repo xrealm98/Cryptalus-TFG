@@ -13,8 +13,10 @@ public class Enemigo : MonoBehaviour
     public EstadisticasPlayer estadisticasPlayer;
 
     private float probabilidadDrop = 1f;
+    private bool estaMuerto = false;
 
     private ItemManager itemManager;
+
 
     void Start()
     {
@@ -24,11 +26,13 @@ public class Enemigo : MonoBehaviour
         comportamientoEnemigo = GetComponent<ComportamientoEnemigo>();
         
         vidaActual = comportamientoEnemigo.vida.Valor;
+        vidaMax = vidaActual;
         barraVida.SetVidaMaxima(vidaMax);
 
     }
     public void RecibirDamage(float damage)
     {
+        if (estaMuerto) return;
         damage -= comportamientoEnemigo.armadura.Valor;
         damage = Mathf.Clamp(damage, 0, float.MaxValue);
 
@@ -45,6 +49,10 @@ public class Enemigo : MonoBehaviour
     }
     void MuerteEnemigo()
     {
+        if (estaMuerto) {
+            return;
+        }
+        estaMuerto = true;
         am.SetBool("estaMuerto", true);
         MonedasManager.AddMonedas(300);
         estadisticasPlayer.GanarExperiencia(250);
@@ -54,8 +62,8 @@ public class Enemigo : MonoBehaviour
             itemManager.GenerarDrop(transform.position);
         }
 
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        float tiempoDestruccion = am.GetCurrentAnimatorStateInfo(0).length;
+        Destroy(gameObject, 2);
     }
 
 }

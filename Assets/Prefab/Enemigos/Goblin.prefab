@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1953336828166622451}
   - component: {fileID: 8950462443062645169}
   - component: {fileID: 6363348080412328051}
+  - component: {fileID: 7263066586810218721}
   - component: {fileID: 1489699763347260919}
   - component: {fileID: 7032554900886394036}
   - component: {fileID: 7876586619024474671}
@@ -206,7 +207,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23597962, y: 0.15013707}
+  m_Offset: {x: -0.23597962, y: 0.089928776}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -217,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5198163, y: 0.389377}
+  m_Size: {x: 0.5198163, y: 0.5097936}
   m_EdgeRadius: 0
 --- !u!50 &6363348080412328051
 Rigidbody2D:
@@ -246,6 +247,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &7263066586810218721
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2248213107908531649}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.3697388, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.95349
 --- !u!114 &1489699763347260919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 0}
   vidaMax: 100
+  vidaActual: 0
   barraVida: {fileID: 5830217547437246506}
   estadisticasPlayer: {fileID: 0}
 --- !u!114 &7032554900886394036
@@ -303,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemigoGFX: {fileID: 4901708132221334214}
-  objetivo: {fileID: 0}
+  player: {fileID: 0}
   puntoAtaque: {fileID: 8879393349127677668}
   layerPlayer:
     serializedVersion: 2
@@ -322,6 +359,7 @@ MonoBehaviour:
   rangoAtaque: 0.75
   distanciaProximoPunto: 0.1
   enemigoDatosSO: {fileID: 11400000, guid: 24f743dd9de36a749be1075d5d60a344, type: 2}
+  estadisticasPlayer: {fileID: 0}
 --- !u!1 &6555711296884060473
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +548,7 @@ GameObject:
   - component: {fileID: 4901708132221334214}
   - component: {fileID: 6626635645220322943}
   - component: {fileID: 8818993398797043944}
+  - component: {fileID: 2912399213559547370}
   m_Layer: 0
   m_Name: GoblinGFX
   m_TagString: Untagged
@@ -605,6 +644,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2912399213559547370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7605435410211153668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52575a9f4d681654d8383500c151bbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7836621549860057510
 GameObject:
   m_ObjectHideFlags: 0

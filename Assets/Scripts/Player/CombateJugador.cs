@@ -39,29 +39,32 @@ public class CombateJugador : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                ataque();
+                am.SetTrigger("Ataque1");
                 tiempoProximoAtaque = Time.time + 1f / stats.velocidadAtaque.Valor;
 
             }
         }
     }
 
-    void ataque() {
-        am.SetTrigger("Ataque1");
-
+    void Ataque() {
         // Detectar enemigos en rango de ataque
-        Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoAtaque.position, stats.rangoAtaque.Valor, layerEnemigos);
+       Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoAtaque.position, stats.rangoAtaque.Valor, layerEnemigos);
 
         foreach (Collider2D enemigo in enemigosGolpeados) {
             Enemigo enemigoComponent = enemigo.GetComponent<Enemigo>();
             if (enemigoComponent != null)
             {
+                // Si es un trigger, no infligir daño, saltar al siguiente enemigo
+                if (enemigo.isTrigger)
+                {
+                    continue; 
+                }
                 enemigoComponent.RecibirDamage(stats.ataque.Valor);
             }
         }
     }
 
-    public void recibirDamage(float damage)
+    public void RecibirDamage(float damage)
     {
         damage -= stats.armadura.Valor;
         damage = Mathf.Clamp(damage, 0, float.MaxValue);
