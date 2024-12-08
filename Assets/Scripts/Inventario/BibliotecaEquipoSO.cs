@@ -7,4 +7,5 @@ public class BibliotecaEquipoSO : MonoBehaviour
     public ObjetoEquipamientoSO[] equipamientoSO;
     public ObjetoSO[] consumibleSO;
     
+
 }

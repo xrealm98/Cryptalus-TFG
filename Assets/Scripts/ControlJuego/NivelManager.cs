@@ -51,7 +51,7 @@ public class NivelManager : MonoBehaviour
     private IEnumerator IniciarNivel()
     {
         // Esperamos hasta que la escena se haya cargado completamente
-        yield return new WaitForSeconds(0.1f); // Puede ajustarse si es necesario
+        yield return new WaitForSeconds(0.1f); 
 
         // Buscar el objeto Grid en la escena
         GameObject gridObject = GameObject.Find("Grid");

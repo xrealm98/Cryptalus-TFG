@@ -1341,7 +1341,7 @@ MonoBehaviour:
   niveles:
   - Nivel 2
   grid: {fileID: 0}
-  playerPrefab: {fileID: 8312890210138446260, guid: c3281b5e4158c1241abaaabbb62f181c, type: 3}
+  playerPrefab: {fileID: 6277253916932148084, guid: c3281b5e4158c1241abaaabbb62f181c, type: 3}
   canvasVidaPrefab: {fileID: 6890818510883244765, guid: f48b772efb3917844a3761dbd184136d, type: 3}
   canvasInventarioPrefab: {fileID: 4394089029406311844, guid: 9963e9204d933f442b2c010f1d494303, type: 3}
   itemManagerPrefab: {fileID: 6757791651686506794, guid: 768ed053aec960a48bee478403c39f18, type: 3}

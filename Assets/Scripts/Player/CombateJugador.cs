@@ -10,7 +10,7 @@ public class CombateJugador : MonoBehaviour
     public Animator am;
     public Transform puntoAtaque;
     public LayerMask layerEnemigos;
-    public BarraVida barraVida;
+    private BarraVida barraVida;
 
     public EstadisticasPlayer stats;
 
@@ -28,6 +28,8 @@ public class CombateJugador : MonoBehaviour
 
         vidaActual = stats.vida.Valor;
         vidaMaxima = stats.vida.Valor;
+
+        barraVida = GameObject.Find("Barra de vida").GetComponent<BarraVida>();
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
     }

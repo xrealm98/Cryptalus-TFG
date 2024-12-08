@@ -19,10 +19,12 @@ public class EstadisticasPlayer : MonoBehaviour
     public int nivelPlayer;
     public int puntosExperienciaActual;
     public int maximoPuntosNivel = 100;
+    GameObject equipamientoCanvas;
 
-   
+
     void Awake()
     {
+        
         DatosGuardados datos = GuardadoManager.instancia.CargarDatos();
         if (datos != null)
         {
@@ -67,6 +69,13 @@ public class EstadisticasPlayer : MonoBehaviour
     private void Start()
     {
 
+        equipamientoCanvas = GameObject.Find("PanelEquipamiento");
+        textoNivel = GameObject.Find("EstadisticaNivel").GetComponent<TMP_Text>();
+        textoAtaque = GameObject.Find("EstadisticaAtaque").GetComponent<TMP_Text>();
+        textoVida = GameObject.Find("EstadisticaVida").GetComponent<TMP_Text>();
+        textoArmadura = GameObject.Find("EstadisticaArmadura").GetComponent<TMP_Text>();
+
+        equipamientoCanvas.SetActive(false);
         ActualizarEstadistasEquipamiento();
 
     }
