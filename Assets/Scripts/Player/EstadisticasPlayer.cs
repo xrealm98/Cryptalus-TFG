@@ -26,17 +26,8 @@ public class EstadisticasPlayer : MonoBehaviour
     {
         
         DatosGuardados datos = GuardadoManager.instancia.CargarDatos();
-        if (datos != null)
-        {
-            
-            Debug.Log("Datos cargados: Monedas = " + datos.monedas);
-        }
-        else
-        {
-            Debug.LogWarning("No se pudieron cargar los datos. Archivo no encontrado o está corrupto.");
-        }
 
-        nivelPlayer = 6;
+        nivelPlayer = 1;
         puntosExperienciaActual = 0;
         maximoPuntosNivel = 100;
 

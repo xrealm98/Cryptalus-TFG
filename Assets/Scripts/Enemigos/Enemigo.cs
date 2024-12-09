@@ -61,8 +61,6 @@ public class Enemigo : MonoBehaviour
         {
             itemManager.GenerarDrop(transform.position);
         }
-
-        float tiempoDestruccion = am.GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, 2);
     }
 

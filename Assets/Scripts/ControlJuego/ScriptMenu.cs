@@ -5,16 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ScriptMenu : MonoBehaviour
 {
-    public void btContinuarPartida()
-    {
-
-    }
-
     public void btIniciarPartida()
     {
-        NivelManager.instancia.IniciarPartida();
+        NivelManager.instancia.CargarNivel();
     }
-
     public void btTienda()
     {
         SceneManager.LoadScene("Tienda");
@@ -25,7 +19,6 @@ public class ScriptMenu : MonoBehaviour
     }
     public void btSalirPartida()
     {
-        Debug.Log("Saliendo...");
         Application.Quit();
     }
 }

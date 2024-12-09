@@ -13,6 +13,10 @@ public class Trampas : MonoBehaviour
     private void Start()
     {
         am = GetComponent<Animator>();
+        if (am == null)
+        {
+            Debug.LogError($"Animator no encontrado en {gameObject.name}. Asegúrate de que tiene un componente Animator.");
+        }
     }
     private void Update()
     {
@@ -25,14 +29,27 @@ public class Trampas : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!estaDentro)
+        if (am == null)
+        {
+            return;
+        }
+        else if (collision.isTrigger) {
+            return;
+        }
+        else if(!estaDentro)
         {
             estaDentro = true;
             am.SetBool("contacto", true);
+
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.isTrigger)
+        {
+            return;
+        }
         if (!HayPersonasDentro())
         {
             estaDentro = false;
@@ -42,6 +59,10 @@ public class Trampas : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.isTrigger)
+        {
+            return;
+        }
         if ((collision.CompareTag("Player") || collision.GetComponent<Enemigo>() != null) && tiempoActual <= 0f){
             am.SetBool("contacto", true);
             tiempoActual = tiempoEntreActivaciones;
@@ -64,6 +85,10 @@ public class Trampas : MonoBehaviour
                 
                 if (enemigo != null)
                 {
+                    if (objeto.isTrigger)
+                    {
+                        continue;
+                    }
                     enemigo.RecibirDamage(damage);
 
                 }

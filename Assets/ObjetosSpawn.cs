@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemigoSpawn : MonoBehaviour
+public class ObjetosSpawn : MonoBehaviour
 {
-    public GameObject[] enemigosPrefabs; 
-    public Tilemap spawnEnemigoTilemap;   
-    
-    public int cantidadMinimaEnemigos = 10;
-    public int cantidadMaximaEnemigos = 20;
+    public GameObject[] objetosPrefabs;
+    public Tilemap spawnObjetosTilemap;
+    public int cantidadMinimaObjetos = 3;
 
     void Start()
     {
-        SpawnEnemigos();
+        SpawnObjetos();
     }
 
-    void SpawnEnemigos() {
+    public void SpawnObjetos()
+    {
 
-        int cantidadEnemigos = Random.Range(cantidadMinimaEnemigos, cantidadMaximaEnemigos + 1);
-       
         List<Vector3> posicionesSpawn = ObtenerPosicionesValidas();
 
         if (posicionesSpawn.Count == 0)
@@ -27,19 +24,23 @@ public class EnemigoSpawn : MonoBehaviour
             Debug.LogWarning("No hay posiciones válidas para spawnear enemigos.");
             return;
         }
-        
-        for (int i = 0; i < cantidadEnemigos; i++)
+        int cantidadMaximaObjetos = posicionesSpawn.Count;
+
+        int cantidadObjetos = Random.Range(cantidadMinimaObjetos, cantidadMaximaObjetos + 1);
+
+        for (int i = 0; i < cantidadObjetos; i++)
         {
             // Seleccionar una posición aleatoria
             int indice = Random.Range(0, posicionesSpawn.Count);
             Vector3 posicion = posicionesSpawn[indice];
-            
+
             // Evitamos spawnear múltiples enemigos en la misma posición
             posicionesSpawn.RemoveAt(indice);
 
             // Seleccionamos un prefab de enemigo aleatorio en el array y lo instanciamos.
-            GameObject enemigoSeleccionado = enemigosPrefabs[Random.Range(0, enemigosPrefabs.Length)];
-            Instantiate(enemigoSeleccionado, posicion, Quaternion.identity);
+            GameObject objetoSeleccionado = objetosPrefabs[Random.Range(0, objetosPrefabs.Length)];
+            Instantiate(objetoSeleccionado, posicion, Quaternion.identity);
+
         }
 
     }
@@ -49,7 +50,7 @@ public class EnemigoSpawn : MonoBehaviour
         List<Vector3> posiciones = new List<Vector3>();
 
         // Iterar sobre las celdas del Tilemap de suelo
-        BoundsInt bounds = spawnEnemigoTilemap.cellBounds;
+        BoundsInt bounds = spawnObjetosTilemap.cellBounds;
         for (int x = bounds.xMin; x < bounds.xMax; x++)
         {
             for (int y = bounds.yMin; y < bounds.yMax; y++)
@@ -57,10 +58,10 @@ public class EnemigoSpawn : MonoBehaviour
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
                 // Verificar que hay un tile en el suelo y no en la pared
-                if (spawnEnemigoTilemap.HasTile(celda))
+                if (spawnObjetosTilemap.HasTile(celda))
                 {
                     // Convertir posición de celda a coordenadas del mundo
-                    Vector3 posicionMundo = spawnEnemigoTilemap.CellToWorld(celda) + spawnEnemigoTilemap.tileAnchor;
+                    Vector3 posicionMundo = spawnObjetosTilemap.CellToWorld(celda) + spawnObjetosTilemap.tileAnchor;
                     posiciones.Add(posicionMundo);
                 }
             }

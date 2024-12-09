@@ -23,18 +23,21 @@ public class MenuPausa : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             if (JuegoPausado)
             {
                 VolverAPartida();
             }
-            else {
+            else
+            {
                 Pausar();
             }
-        }   
+        }
     }
 
-    public void VolverAPartida() {
+    public void VolverAPartida()
+    {
         InterfazPausa.SetActive(false);
         InterfazOpciones.SetActive(false);
         Time.timeScale = 1f;
@@ -46,16 +49,11 @@ public class MenuPausa : MonoBehaviour
     {
         InterfazOpciones.SetActive(true);
     }
-
-    public void GuardarPartida()
-    {
-    } 
-
     public void VolverAlMenu()
     {
         Debug.Log("Cargando menu");
         GuardadoManager.instancia.GuardarDatos();
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         JuegoPausado = false;
         InterfazPausa.SetActive(false);
         SceneManager.LoadScene(ESCENA_MENU_PRINCIPAL);
@@ -67,11 +65,12 @@ public class MenuPausa : MonoBehaviour
         Application.Quit();
     }
 
-    void Pausar() {
+    void Pausar()
+    {
         InterfazPausa.SetActive(true);
         InterfazOpciones.SetActive(false);
         Time.timeScale = 0f;
-        JuegoPausado=true;
+        JuegoPausado = true;
 
 
     }
