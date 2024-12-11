@@ -31,7 +31,7 @@ public class TrampasSpawn : MonoBehaviour
 
         for (int i = 0; i < cantidadTrampas; i++)
         {
-            // Seleccionar una posición aleatoria
+            // Seleccionamos una posición aleatoria
             int indice = Random.Range(0, posicionesSpawn.Count);
             Vector3 posicion = posicionesSpawn[indice];
 
@@ -58,10 +58,10 @@ public class TrampasSpawn : MonoBehaviour
             {
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
-                // Verificar que hay un tile en el suelo y no en la pared
+                // Verificamos que hay un tile en el suelo y no en la pared
                 if (spawnTrampasTilemap.HasTile(celda))
                 {
-                    // Convertir posición de celda a coordenadas del mundo
+                    // Convertimos la posición de celda a coordenadas del mundo
                     Vector3 posicionMundo = spawnTrampasTilemap.CellToWorld(celda) + spawnTrampasTilemap.tileAnchor;
                     posiciones.Add(posicionMundo);
                 }

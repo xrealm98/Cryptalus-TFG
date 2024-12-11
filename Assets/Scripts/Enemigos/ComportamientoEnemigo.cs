@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
+using System;
 
-public class ComportamientoEnemigo : MonoBehaviour
+
+public enum EstadoEnemigo
 {
+    Idle,
+    Seguimiento,
+    Atacando
 
-    public Transform enemigoGFX;
-    public Transform player;
+};
+public class ComportamientoEnemigo : MonoBehaviour
+{ 
     public Transform puntoAtaque;
-    private GameObject hitbox;
-    Animator am;
-    public LayerMask layerPlayer;
+    private Rigidbody2D rb;
+    private Animator am;
+    private EstadoEnemigo estadoEnemigo;
 
-    float tiempoProximoAtaque = 3f;
+    public LayerMask layerPlayer;
+    private Transform player;
+
+
+    private float tiempoProximoAtaqueColdoown;
 
     public string nombreEnemigo;
     public EstadisticasBase vida;
@@ -21,42 +30,32 @@ public class ComportamientoEnemigo : MonoBehaviour
     public EstadisticasBase armadura;
     public EstadisticasBase velocidadMovimiento;
     public EstadisticasBase velocidadAtaque;
-    public float rangoAtaque;
+    private float rangoAtaque;
 
+    private bool mirandoDireccion = true;
 
-    private bool mirandoDerecha = true;
-    public float distanciaProximoPunto = 1f;
-    private bool estaPersiguiendo;
-
-    Path path;
-    int puntoActual;
-    bool puntoAlcanzado = false;
-    Seeker seeker;
-    Rigidbody2D rb;
+    // Circulo de detección de player donde el enemigo empezara a perseguir.
+    public float rangoDetector;
+    public Transform puntoDetector;
 
     public EnemigoDatos enemigoDatosSO;
     public EstadisticasPlayer estadisticasPlayer;
 
-    private float posicionInicialXHitbox;
 
     void Start()
     {
-        estadisticasPlayer = GameObject.Find("Player").GetComponent<EstadisticasPlayer>();
         am = GetComponentInChildren<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        hitbox = transform.Find("HitboxGolpe").gameObject;
-
-        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        CambioEstado(EstadoEnemigo.Idle);
 
-        posicionInicialXHitbox = hitbox.transform.localPosition.x;
-
+        estadisticasPlayer = GameObject.Find("Player").GetComponent<EstadisticasPlayer>();
+      
         IniciarEstadisticas();
-        InvokeRepeating("ActualizarCamino", 0f, .5f);
-
+       
 
     }
 
+    // Método que inicializa las estadisticas del enemigo y las escala según el nivel del jugador.
     public void IniciarEstadisticas()
     {
         nombreEnemigo = enemigoDatosSO.nombreTipoEnemigo;
@@ -66,136 +65,126 @@ public class ComportamientoEnemigo : MonoBehaviour
         velocidadMovimiento.ValorBase = enemigoDatosSO.velocidadMovimiento;
         velocidadAtaque.ValorBase = enemigoDatosSO.velocidadAtaque;
         rangoAtaque = enemigoDatosSO.rangoAtaque;
+        rangoDetector = enemigoDatosSO.rangoDetencion;
 
 
-        float calculo = estadisticasPlayer.nivelPlayer * 0.05f;
+        float escalarEstadisticas = estadisticasPlayer.nivelPlayer * 0.05f;
 
-        ataque.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
-        armadura.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
-        vida.addModificador(new ModificadorEstadisticas(calculo, TipoModificadorEstadistica.PorcentajeMult, this));
+        ataque.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
+        armadura.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
+        vida.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
 
-        Debug.Log("Ataque: " + ataque.Valor);
-        Debug.Log("Armadura: " + armadura.Valor);
-        Debug.Log("Vida: " + vida.Valor);
-
-
-    }
-
-
-    void ActualizarCamino()
-    {
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, player.position, CaminoCompletado);
-        }
-    }
-
-    void CaminoCompletado(Path p)
-    {
-        if (!p.error)
-        {
-            path = p;
-        }
+        //Debug.Log("Ataque: " + ataque.Valor);
+        //Debug.Log("Armadura: " + armadura.Valor);
+        //Debug.Log("Vida: " + vida.Valor);
+        
 
     }
+
     void Update()
-    {
-
-        rb.AddForce(Vector2.zero);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (player == null)
-            {
-                player = collision.transform;
-            }
-            estaPersiguiendo = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            am.SetBool("movimiento", false);
-            rb.AddForce(Vector2.zero);
-            estaPersiguiendo = false;
-        }
-    }
-
-
-    void FixedUpdate()
     {
         if (am.GetBool("estaMuerto"))
         {
+            rb.velocity = Vector2.zero;
             GetComponent<Collider2D>().enabled = false;
             this.enabled = false;
-
-        }
-
-        if (path == null)
-        {
             return;
-        }
 
-        if (estaPersiguiendo)
+        }
+        CheckJugador();
+        if (tiempoProximoAtaqueColdoown > 0)
         {
-            if (puntoActual >= path.vectorPath.Count)
-            {
-                am.SetBool("movimiento", false);
-                if (Time.time >= tiempoProximoAtaque)
-                {
-                    am.SetTrigger("Ataque1");
-                    tiempoProximoAtaque = Time.time + 3f / velocidadAtaque.Valor;
-                }
-                puntoAlcanzado = true;
-                return;
-            }
-            else
-            {
-                puntoAlcanzado = false;
-            }
-
-            Vector2 direccion = ((Vector2)path.vectorPath[puntoActual] - rb.position).normalized;
-
-            Vector2 fuerza = direccion * velocidadMovimiento.Valor * Time.deltaTime;
-
-            rb.AddForce(fuerza);
-
-            float distancia = Vector2.Distance(rb.position, path.vectorPath[puntoActual]);
-
-            if (distancia < distanciaProximoPunto)
-            {
-                puntoActual++;
-
-            }
-
-            ComprobarMovimiento(fuerza);
+            tiempoProximoAtaqueColdoown -= Time.deltaTime;
         }
-
+        if (estadoEnemigo == EstadoEnemigo.Seguimiento)
+        {
+            Seguimiento();
+        }
+        else if (estadoEnemigo == EstadoEnemigo.Atacando)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        
     }
 
-    void ComprobarMovimiento(Vector2 fuerza)
+    // Método para seguir al jugador.
+    void Seguimiento()
     {
-        if (fuerza.magnitude >= 0.01f)
+      
+        if (player.position.x < transform.position.x && mirandoDireccion ||
+                   player.position.x > transform.position.x && !mirandoDireccion)
         {
-            am.SetBool("movimiento", true);
+            Flip();
+        }
+        Vector2 direccion = (player.position - transform.position).normalized;
+        rb.velocity = direccion * velocidadMovimiento.Valor;
 
-            // Flip según la dirección
-            if ((fuerza.x > 0 && !mirandoDerecha) || (fuerza.x < 0 && mirandoDerecha))
+    }
+
+    // Método que interactua con el punto de detención para tener un rango de agresividad del enemigo.
+    private void CheckJugador()
+    {
+        Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoDetector.position, rangoDetector, layerPlayer);
+        if (enemigosGolpeados.Length > 0)
+        {
+            player = enemigosGolpeados[0].transform;
+           // Debug.Log(Vector2.Distance(transform.position, player.position));
+            
+            if (Vector2.Distance(transform.position, player.position) <= rangoAtaque && tiempoProximoAtaqueColdoown <= 0)
             {
-                Flip();
+                tiempoProximoAtaqueColdoown = velocidadAtaque.Valor;
+                CambioEstado(EstadoEnemigo.Atacando);
+
+            }
+            else if (Vector2.Distance(transform.position, player.position) > rangoAtaque && estadoEnemigo != EstadoEnemigo.Atacando)
+            {
+                CambioEstado(EstadoEnemigo.Seguimiento);
+
             }
         }
-        else
+        else {
+            rb.velocity = Vector2.zero;
+            CambioEstado(EstadoEnemigo.Idle);
+        
+        }
+    }
+    // Método donde cambiamos el estado del enemigo según su acción actual.
+    public void CambioEstado(EstadoEnemigo nuevoEstado)
+    {
+
+        // Salir de la animación actual
+        if (estadoEnemigo == EstadoEnemigo.Idle)
         {
-            am.SetBool("movimiento", false);
+            am.SetBool("enIdle", false);
+        }
+        else if (estadoEnemigo == EstadoEnemigo.Seguimiento)
+        {
+            am.SetBool("enSeguimiento", false);
+        }
+        else if (estadoEnemigo == EstadoEnemigo.Atacando)
+        {
+            am.SetBool("enAtaque", false);
+        }
+
+        // Actualizamos el estado actual y ponemos la nueva animación 
+        estadoEnemigo = nuevoEstado;
+
+        if (estadoEnemigo == EstadoEnemigo.Idle)
+        {
+            am.SetBool("enIdle", true);
+        }
+        else if (estadoEnemigo == EstadoEnemigo.Seguimiento)
+        {
+            am.SetBool("enSeguimiento", true);
+        }
+        else if (estadoEnemigo == EstadoEnemigo.Atacando)
+        {
+            am.SetBool("enAtaque", true);
         }
 
     }
+
+    // Método para hacer daño al jugador en caso de estar en el punto de ataque. (Se llama desde la animación)
     public void AtaqueAlJugador()
     {
         // Detectar enemigos en rango de ataque
@@ -206,38 +195,15 @@ public class ComportamientoEnemigo : MonoBehaviour
             enemigo.GetComponent<CombateJugador>().RecibirDamage(ataque.Valor);
         }
     }
-
+    // Método para hacer flip al eje del objeto.
     void Flip()
     {
-
-        mirandoDerecha = !mirandoDerecha;
-
+        mirandoDireccion = !mirandoDireccion;
         // Cambiar escala del enemigo
-        enemigoGFX.localScale = new Vector3(mirandoDerecha ? 1f : -1f, 1f, 1f);
-
-        // Actualizar la posición de la hitbox
-        FlipHitBox();
-
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
 
     }
 
-    void FlipHitBox()
-    {
-
-        // Restauramos la posición inicial de la hitbox en X y la invertimos según la dirección
-        hitbox.transform.localPosition = new Vector3(posicionInicialXHitbox * (mirandoDerecha ? 1 : -15),
-                                                     hitbox.transform.localPosition.y,
-                                                     hitbox.transform.localPosition.z);
-
-        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
-        if (circleCollider != null)
-        {
-            circleCollider.offset = new Vector2(Mathf.Abs(circleCollider.offset.x) * (mirandoDerecha ? 1 : -1),
-                                                circleCollider.offset.y);
-        }
-
-
-    }
     private void OnDrawGizmosSelected()
     {
         if (puntoAtaque == null)
@@ -245,6 +211,8 @@ public class ComportamientoEnemigo : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(puntoAtaque.position, rangoAtaque);
+        Gizmos.DrawWireSphere(puntoDetector.position, rangoDetector);
     }
 
 }
+

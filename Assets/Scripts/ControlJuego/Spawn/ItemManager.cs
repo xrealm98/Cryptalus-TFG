@@ -40,6 +40,8 @@ public class ItemManager : MonoBehaviour
         // Creamos el gameobject para el consumible
         GameObject nuevoConsumible = Instantiate(objetoPrefab, posicionEnemigo, Quaternion.identity);
 
+        nuevoConsumible.layer = LayerMask.NameToLayer("Objetos");
+
         // Asignamos las propiedades al objeto consumible
         Transform hijoSprite = nuevoConsumible.transform.GetChild(0);
         SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
@@ -74,6 +76,7 @@ public class ItemManager : MonoBehaviour
 
             // Se asigna el nombre
             nuevoObjeto.name = objetoSO.nombreObjeto;
+            nuevoObjeto.layer = LayerMask.NameToLayer("Objetos");
 
             // Accedemos al hijo con el SpriteRenderer
             Transform hijoSprite = nuevoObjeto.transform.GetChild(0);

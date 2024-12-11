@@ -13,11 +13,13 @@ public class NivelManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject canvasVidaPrefab;
     public GameObject canvasInventarioPrefab;
+    public GameObject canvasFinPartidaPrefab;
 
     // Copias para instanciar los objetos y no trabajar sobre los Prefab
     private GameObject player;
     private GameObject canvasVida;
     private GameObject canvasInventario;
+    private GameObject canvasFinPartida;
 
     private bool partidaIniciada = false;
 
@@ -32,7 +34,12 @@ public class NivelManager : MonoBehaviour
         else
         {
             instancia = this;
+            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
+    }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; 
     }
 
     // Cuando se llama buscara una escena aleatoria dentro del array y se cargará. Llama a CargarPersonaYInterfaz()
@@ -63,7 +70,19 @@ public class NivelManager : MonoBehaviour
         canvasInventario = Instantiate(canvasInventarioPrefab);
         canvasInventario.name = canvasInventarioPrefab.name;
 
+        canvasFinPartida = Instantiate(canvasFinPartidaPrefab);
+        canvasFinPartida.name = canvasFinPartidaPrefab.name;
 
+
+
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+       if (scene.name == "Nivel 1" || scene.name == "Nivel 2")
+        {
+            string[] temas = { "TemaInGame", "TemaInGame2" };
+            FindObjectOfType<AudioManager>().PlayRandomTema(temas);
+        }
     }
 
 }

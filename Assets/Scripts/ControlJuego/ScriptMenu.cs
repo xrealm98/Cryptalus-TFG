@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ScriptMenu : MonoBehaviour
 {
+   void Start() {
+        FindObjectOfType<AudioManager>().Play("TemaPrincipal");
+    
+    }
     public void btIniciarPartida()
     {
+        FindObjectOfType<AudioManager>().StopPlaying("TemaPrincipal");
         NivelManager.instancia.CargarNivel();
     }
     public void btTienda()

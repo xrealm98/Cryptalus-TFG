@@ -126,6 +126,7 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
     public void OnClickDerecho()
     {
         GameObject objetoATirar = new GameObject(nombreObjeto);
+        objetoATirar.layer = LayerMask.NameToLayer("Objetos");
         Objeto nuevoObjeto = objetoATirar.AddComponent<Objeto>();
         nuevoObjeto.cantidad = 1;
         nuevoObjeto.nombreObjeto = nombreObjeto;

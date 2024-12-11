@@ -70,10 +70,10 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
             {
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
-                // Verificar que hay un tile en el suelo.
+                // Verificamos que hay un tile en el suelo.
                 if (spawnPlayerYEscaleraTilemap.HasTile(celda))
                 {
-                    // Convertimos posición de celda a coordenadas del mundo
+                    // Convertimos la posición de celda a coordenadas del mundo
                     Vector3 posicionMundo = spawnPlayerYEscaleraTilemap.CellToWorld(celda) + spawnPlayerYEscaleraTilemap.tileAnchor;
                     posiciones.Add(posicionMundo);
                 }
@@ -91,7 +91,7 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
 
         if (posicionesFiltradas.Count > 0)
         {
-            // Elegir una posición aleatoria entre las válidas
+            // Elegimos una posición aleatoria entre las válidas
             int indiceAleatorio = Random.Range(0, posicionesFiltradas.Count);
             return posicionesFiltradas[indiceAleatorio];
         }

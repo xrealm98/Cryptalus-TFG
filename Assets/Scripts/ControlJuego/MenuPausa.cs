@@ -56,6 +56,7 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f;
         JuegoPausado = false;
         InterfazPausa.SetActive(false);
+        LimpiarObjetosPersistentes();
         SceneManager.LoadScene(ESCENA_MENU_PRINCIPAL);
     }
 
@@ -72,6 +73,17 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 0f;
         JuegoPausado = true;
 
-
+    }
+    public void LimpiarObjetosPersistentes()
+    {
+        GameObject[] todosLosObjetos = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in todosLosObjetos)
+        {
+            if (obj.scene.name == "DontDestroyOnLoad")
+            {
+                Destroy(obj);
+                Debug.Log("Objeto destruido: " + obj.name);
+            }
+        }
     }
 }

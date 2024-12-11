@@ -16,6 +16,7 @@ MonoBehaviour:
   vida: 70
   ataque: 40
   armadura: 10
-  velocidadMovimiento: 600
+  velocidadMovimiento: 4
   velocidadAtaque: 3
-  rangoAtaque: 0.75
+  rangoAtaque: 1.2
+  rangoDetencion: 3

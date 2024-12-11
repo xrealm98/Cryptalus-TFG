@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f39c9e14457cb40b6546df3764154c, type: 3}
   m_Name: Ojo
   m_EditorClassIdentifier: 
-  nombreTipoEnemigo: 
+  nombreTipoEnemigo: Ojo volador
   vida: 120
   ataque: 60
   armadura: 20
-  velocidadMovimiento: 250
+  velocidadMovimiento: 2.5
   velocidadAtaque: 2
   rangoAtaque: 1
+  rangoDetencion: 6

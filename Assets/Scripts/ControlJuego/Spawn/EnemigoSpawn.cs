@@ -16,7 +16,7 @@ public class EnemigoSpawn : MonoBehaviour
     {
         SpawnEnemigos();
     }
- 
+
     public void SpawnEnemigos()
     {
 
@@ -33,7 +33,7 @@ public class EnemigoSpawn : MonoBehaviour
 
         for (int i = 0; i < cantidadEnemigos; i++)
         {
-            // Seleccionar una posición aleatoria
+            // Seleccionamos una posición aleatoria
             int indice = Random.Range(0, posicionesSpawn.Count);
             Vector3 posicion = posicionesSpawn[indice];
 
@@ -52,7 +52,7 @@ public class EnemigoSpawn : MonoBehaviour
     {
         List<Vector3> posiciones = new List<Vector3>();
 
-        // Iterar sobre las celdas del Tilemap de suelo
+        // Iteramos sobre las celdas del Tilemap de suelo
         BoundsInt bounds = spawnEnemigoTilemap.cellBounds;
         for (int x = bounds.xMin; x < bounds.xMax; x++)
         {
@@ -60,11 +60,13 @@ public class EnemigoSpawn : MonoBehaviour
             {
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
-                // Verificar que hay un tile en el suelo y no en la pared
+                // Verificamos que hay un tile en el suelo y no en la pared
                 if (spawnEnemigoTilemap.HasTile(celda))
                 {
-                    // Convertir posición de celda a coordenadas del mundo
+                    // Convertimos posición de celda a coordenadas del mundo
                     Vector3 posicionMundo = spawnEnemigoTilemap.CellToWorld(celda) + spawnEnemigoTilemap.tileAnchor;
+
+
                     posiciones.Add(posicionMundo);
                 }
             }

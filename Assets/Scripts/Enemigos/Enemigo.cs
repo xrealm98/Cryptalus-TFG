@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour
 {
     public Animator am;
-    public float vidaMax = 100;
+    public float vidaMax;
     public float vidaActual;
     private ComportamientoEnemigo comportamientoEnemigo;
     public BarraVida barraVida;
@@ -24,12 +24,16 @@ public class Enemigo : MonoBehaviour
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         am = GetComponentInChildren<Animator>();
         comportamientoEnemigo = GetComponent<ComportamientoEnemigo>();
-        
+        Invoke("InicializarVida", 0.1f);
+
+    }
+    public void InicializarVida() {
         vidaActual = comportamientoEnemigo.vida.Valor;
         vidaMax = vidaActual;
         barraVida.SetVidaMaxima(vidaMax);
-
     }
+
+
     public void RecibirDamage(float damage)
     {
         if (estaMuerto) return;

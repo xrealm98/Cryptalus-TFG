@@ -13,6 +13,7 @@ public class CombateJugador : MonoBehaviour
     private BarraVida barraVida;
 
     public EstadisticasPlayer stats;
+    public FinDelJuego finDelJuego;
 
     public float vidaMaxima;
     public float vidaActual;
@@ -30,6 +31,9 @@ public class CombateJugador : MonoBehaviour
         vidaMaxima = stats.vida.Valor;
 
         barraVida = GameObject.Find("Barra de vida").GetComponent<BarraVida>();
+        finDelJuego = GameObject.Find("Fondo").GetComponent<FinDelJuego>();
+        finDelJuego.InicializarPlayer();
+
         barraVida.SetVidaMaxima(stats.vida.Valor);
         rangoAtaque = stats.rangoAtaque.Valor;
     }
@@ -93,8 +97,9 @@ public class CombateJugador : MonoBehaviour
     {
         am.SetBool("estaMuerto", true);
         GuardadoManager.instancia.GuardarDatos();
+        //FindObjectOfType<AudioManager>().Play("MuerteJugador");
         GetComponent<Collider2D>().enabled = false;
-        //SceneManager.LoadScene("Menu Principal");
+        finDelJuego.IniciarPantalla();
         this.enabled = false;
         GetComponent<MovimientoJugador>().enabled = false;  
         

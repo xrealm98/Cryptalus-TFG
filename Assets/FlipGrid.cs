@@ -5,10 +5,6 @@ using UnityEngine;
 public class FlipGrid : MonoBehaviour
 {
 
-    /*private void Awake() {
-
-        EditarNivel();
-    }*/
 
     public void EditarNivel()
     {
@@ -24,23 +20,19 @@ public class FlipGrid : MonoBehaviour
             transform.localScale = new Vector3(1, transform.localScale.y * -1, 1);
         }
         
-        //yield return new WaitForSeconds(0.2f);
+        EnemigoSpawn enemigoSpawn = GetComponentInChildren<EnemigoSpawn>();
 
-       // EnemigoSpawn enemigoSpawn = GetComponentInChildren<EnemigoSpawn>();
-
-       /* if (enemigoSpawn != null)
+        if (enemigoSpawn != null)
         {
-            // Llamamos a SpawnEnemigos desde EnemigoSpawn
+            // Llamar al método SpawnEnemigos después del flip
             enemigoSpawn.SpawnEnemigos();
         }
         else
         {
-            Debug.LogError("No se encontró el componente EnemigoSpawn en los hijos de Grid.");
-        }*/
+            Debug.LogError("No se encontró el componente EnemigoSpawn en los hijos de FlipGrid.");
+        }
 
-       // PlayerYEscalerasSpawn playerYEscalerasSpawn = GetComponentInChildren<PlayerYEscalerasSpawn>();
 
-       
 
     }
 }

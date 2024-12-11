@@ -34,42 +34,11 @@ public class CofreScript : MonoBehaviour
 
     }
     private void DropObjeto() {
-        Vector3 posicionDrop = CalcularPosicionDrop();
-        itemManager.GenerarDrop(posicionDrop);
-        cofreYaAbierto = true;
-        // Destroy(gameObject, 2);
-
-    }
-
-    private Vector3 CalcularPosicionDrop()
-    {
        
-        float distanciaCheck = 1f;
+        itemManager.GenerarDrop(transform.position);
+        cofreYaAbierto = true;
+        Destroy(gameObject, 0.5f);
 
-        // Posiciones relativas que se quieren verificar.
-        Vector3 posicionArriba = transform.position + Vector3.up * distanciaCheck;
-        Vector3 posicionAbajo = transform.position + Vector3.down * distanciaCheck;
-
-        // Chequeamos si hay obstáculos (posición, tamaño objeto y el layer)
-        bool obstaculoArriba = Physics2D.OverlapCircle(posicionArriba, 0.3f, layerObstaculos);
-        bool obstaculoAbajo = Physics2D.OverlapCircle(posicionAbajo, 0.3f, layerObstaculos);
-
-        // Miramos la posición
-        if (!obstaculoAbajo)
-        {
-            // El Drop es hacia abajo
-            return posicionAbajo; 
-        }
-        else if (!obstaculoArriba)
-        {
-            // El Drop es hacia arriba
-            return posicionArriba; 
-        }
-        else
-        {
-            // Drop encima del cofre si no hay posiciones posibles.
-            return transform.position; 
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

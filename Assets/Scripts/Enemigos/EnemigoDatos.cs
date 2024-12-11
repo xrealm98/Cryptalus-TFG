@@ -12,5 +12,6 @@ public class EnemigoDatos : ScriptableObject
     public float velocidadMovimiento;
     public float velocidadAtaque;
     public float rangoAtaque;
+    public float rangoDetencion;
 
 }
