@@ -808,6 +808,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     fuente: {fileID: 0}
+  - name: SonidoCofreAbrir
+    clip: {fileID: 8300000, guid: e38412ca6e8110b49b01086cc34b882c, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    fuente: {fileID: 0}
 --- !u!4 &873812053
 Transform:
   m_ObjectHideFlags: 0

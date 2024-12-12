@@ -21,6 +21,7 @@ public class CofreScript : MonoBehaviour
     {
         if (jugadorDentroCollider && Input.GetKeyDown(KeyCode.E) && !cofreYaAbierto)
         {
+            FindObjectOfType<AudioManager>().Play("SonidoCofreAbrir");
             AbrirCofre();
             
         }

@@ -58,7 +58,7 @@ public class TrampasSpawn : MonoBehaviour
             {
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
-                // Verificamos que hay un tile en el suelo y no en la pared
+                // Verificamos que hay un tile en el suelo.
                 if (spawnTrampasTilemap.HasTile(celda))
                 {
                     // Convertimos la posición de celda a coordenadas del mundo

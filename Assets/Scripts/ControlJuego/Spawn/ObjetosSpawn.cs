@@ -57,7 +57,7 @@ public class ObjetosSpawn : MonoBehaviour
             {
                 Vector3Int celda = new Vector3Int(x, y, 0);
 
-                // Verificamos que hay un tile en el suelo y no en la pared
+                // Verificamos que hay un tile en el suelo.
                 if (spawnObjetosTilemap.HasTile(celda))
                 {
                     // Convertimos la posición de celda a coordenadas del mundo

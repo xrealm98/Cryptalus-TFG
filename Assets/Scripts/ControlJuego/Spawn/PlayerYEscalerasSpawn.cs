@@ -15,7 +15,8 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
         SpawnPlayerYEscaleras();
     }
 
-    public void SpawnPlayerYEscaleras() {
+    public void SpawnPlayerYEscaleras()
+    {
         List<Vector3> posicionesValidas = ObtenerPosicionesValidas();
 
         if (posicionesValidas.Count > 1)
@@ -41,63 +42,51 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
                 {
                     jugador.transform.position = posicionJugador;
                 }
-                else
+
+            }
+        }
+
+        List<Vector3> ObtenerPosicionesValidas()
+        {
+            List<Vector3> posiciones = new List<Vector3>();
+
+            // Iterar sobre las celdas del Tilemap de suelo
+            BoundsInt bounds = spawnPlayerYEscaleraTilemap.cellBounds;
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
-                    Debug.LogError("No se encontró el jugador en la escena.");
+                    Vector3Int celda = new Vector3Int(x, y, 0);
+
+                    // Verificamos que hay un tile en el suelo.
+                    if (spawnPlayerYEscaleraTilemap.HasTile(celda))
+                    {
+                        // Convertimos la posición de celda a coordenadas del mundo
+                        Vector3 posicionMundo = spawnPlayerYEscaleraTilemap.CellToWorld(celda) + spawnPlayerYEscaleraTilemap.tileAnchor;
+                        posiciones.Add(posicionMundo);
+                    }
                 }
             }
-            else
+
+            return posiciones;
+        }
+
+        Vector3 SeleccionarPosicionJugador(List<Vector3> posiciones, Vector3 posicionEscalera)
+        {
+            // Creamos una lista de posiciones que cumplen con la distancia mínima para spawnear el jugador a distancia de la escalera.
+            List<Vector3> posicionesFiltradas = posiciones.FindAll(posicion =>
+                Vector3.Distance(posicion, posicionEscalera) >= distanciaMinima);
+
+            if (posicionesFiltradas.Count > 0)
             {
-                Debug.LogError("No se encontró una posición válida para el jugador que cumpla con la distancia mínima.");
+                // Elegimos una posición aleatoria entre las válidas
+                int indiceAleatorio = Random.Range(0, posicionesFiltradas.Count);
+                return posicionesFiltradas[indiceAleatorio];
             }
-        }
-        else
-        {
-            Debug.LogError("No hay suficientes posiciones válidas en el Tilemap para el jugador y la escalera.");
+
+            // Si no hay posiciones que cumplan con la distancia mínima, se devolverá Vector3.zero
+            return Vector3.zero;
         }
 
     }
-
-    List<Vector3> ObtenerPosicionesValidas()
-    {
-        List<Vector3> posiciones = new List<Vector3>();
-
-        // Iterar sobre las celdas del Tilemap de suelo
-        BoundsInt bounds = spawnPlayerYEscaleraTilemap.cellBounds;
-        for (int x = bounds.xMin; x < bounds.xMax; x++)
-        {
-            for (int y = bounds.yMin; y < bounds.yMax; y++)
-            {
-                Vector3Int celda = new Vector3Int(x, y, 0);
-
-                // Verificamos que hay un tile en el suelo.
-                if (spawnPlayerYEscaleraTilemap.HasTile(celda))
-                {
-                    // Convertimos la posición de celda a coordenadas del mundo
-                    Vector3 posicionMundo = spawnPlayerYEscaleraTilemap.CellToWorld(celda) + spawnPlayerYEscaleraTilemap.tileAnchor;
-                    posiciones.Add(posicionMundo);
-                }
-            }
-        }
-
-        return posiciones;
-    }
-   
-    Vector3 SeleccionarPosicionJugador(List<Vector3> posiciones, Vector3 posicionEscalera)
-    {
-        // Creamos una lista de posiciones que cumplen con la distancia mínima para spawnear el jugador a distancia de la escalera.
-        List<Vector3> posicionesFiltradas = posiciones.FindAll(posicion =>
-            Vector3.Distance(posicion, posicionEscalera) >= distanciaMinima);
-
-        if (posicionesFiltradas.Count > 0)
-        {
-            // Elegimos una posición aleatoria entre las válidas
-            int indiceAleatorio = Random.Range(0, posicionesFiltradas.Count);
-            return posicionesFiltradas[indiceAleatorio];
-        }
-
-        // Si no hay posiciones que cumplan con la distancia mínima, se devolverá Vector3.zero
-        return Vector3.zero;
-    }
-
 }

@@ -12,14 +12,8 @@ public class MovimientoJugador : MonoBehaviour
     private GameObject hitbox;
     private bool mirandoDerecha = true;
 
-
-    private bool alternarPaso = true;
-
     public EstadisticasPlayer stats;
-    private AudioManager audioManager;
-    
-    private float pasoTimer = 0f;
-    private float tiempoEntrePasos = 0.5f;
+ 
 
     private void Awake()
     {
@@ -28,7 +22,6 @@ public class MovimientoJugador : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         stats = GetComponent<EstadisticasPlayer>();
         hitbox = transform.Find("HitboxGolpe").gameObject;
-        audioManager = FindObjectOfType<AudioManager>();
 
     }
     private void OnMovimiento(InputValue value)
@@ -55,27 +48,6 @@ public class MovimientoJugador : MonoBehaviour
         // Movimiento y velocidad.
         rb.MovePosition(rb.position + movimiento * stats.velocidadMovimiento.Valor * Time.fixedDeltaTime);
         am.SetBool("movimiento", movimiento.magnitude > 0);
-
-
-
-        if (movimiento.magnitude > 0)
-        {
-            pasoTimer -= Time.fixedDeltaTime;
-            if (pasoTimer <= 0)
-            {
-                string paso = alternarPaso ? "PasosPlayer" : "PasosPlayer2";
-                audioManager.Play(paso);
-                alternarPaso = !alternarPaso;
-                pasoTimer = tiempoEntrePasos;
-            }
-        }
-        else
-        {
-            audioManager.StopPlaying("PasosPlayer");
-            audioManager.StopPlaying("PasosPlayer2");
-            pasoTimer = 0f;
-
-        }
     }
 
     public void flipHitBox(float direccionX)
