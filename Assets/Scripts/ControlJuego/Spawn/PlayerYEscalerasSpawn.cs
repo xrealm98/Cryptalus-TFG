@@ -32,7 +32,8 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
             posicionesValidas.RemoveAt(indiceEscalera);
 
             // Seleccionar una posición aleatoria para el jugador que cumpla con la distancia mínima
-            Vector3 posicionJugador = SeleccionarPosicionJugador(posicionesValidas, posicionEscalera);
+            int indiceJugador = Random.Range(0, posicionesValidas.Count);
+            Vector3 posicionJugador = posicionesValidas[indiceJugador];
 
             if (posicionJugador != Vector3.zero)
             {
@@ -71,22 +72,6 @@ public class PlayerYEscalerasSpawn : MonoBehaviour
             return posiciones;
         }
 
-        Vector3 SeleccionarPosicionJugador(List<Vector3> posiciones, Vector3 posicionEscalera)
-        {
-            // Creamos una lista de posiciones que cumplen con la distancia mínima para spawnear el jugador a distancia de la escalera.
-            List<Vector3> posicionesFiltradas = posiciones.FindAll(posicion =>
-                Vector3.Distance(posicion, posicionEscalera) >= distanciaMinima);
-
-            if (posicionesFiltradas.Count > 0)
-            {
-                // Elegimos una posición aleatoria entre las válidas
-                int indiceAleatorio = Random.Range(0, posicionesFiltradas.Count);
-                return posicionesFiltradas[indiceAleatorio];
-            }
-
-            // Si no hay posiciones que cumplan con la distancia mínima, se devolverá Vector3.zero
-            return Vector3.zero;
-        }
 
     }
 }
