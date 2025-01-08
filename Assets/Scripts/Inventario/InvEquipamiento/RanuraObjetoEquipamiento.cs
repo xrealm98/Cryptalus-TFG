@@ -6,7 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-
+/// <summary>
+/// Clase que gestiona las ranuras del inventario de equipamiento.
+/// Permite añadir, seleccionar, equipar y desequipar objetos.
+/// </summary>
 public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
@@ -40,6 +43,15 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         bibliotecaEquipoSO = GameObject.Find("CanvasInventario").GetComponent<BibliotecaEquipoSO>();
     }
 
+    /// <summary>
+    /// Añade un objeto a la ranura, actualizando su información y estado.
+    /// </summary>
+    /// <param name="nombreObjeto">Nombre del objeto.</param>
+    /// <param name="cantidad">Cantidad del objeto.</param>
+    /// <param name="sprite">Sprite del objeto.</param>
+    /// <param name="descripcionObjeto">Descripción del objeto.</param>
+    /// <param name="tipoObjeto">Tipo del objeto.</param>
+    /// <returns>Cantidad sobrante si la ranura ya estaba llena.</returns>
     public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto)
     {
         if (estaLleno)
@@ -62,7 +74,11 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
         return 0;
     }
-
+    
+    /// <summary>
+    /// Muestra un tooltip con la información del objeto al pasar el ratón sobre la ranura.
+    /// </summary>
+    /// <param name="eventData">Datos del evento de puntero.</param>
     public void OnPointerEnter(PointerEventData eventData)
     {
 
@@ -72,7 +88,10 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
         }
     }
-
+    
+    /// <summary>
+    /// Oculta el tooltip al salir del área de la ranura.
+    /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
 
@@ -80,7 +99,10 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
 
     }
-
+    /// <summary>
+    /// Gestiona los clics del jugador.
+    /// </summary>
+    /// <param name="eventData">Datos del evento de clic.</param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -93,7 +115,10 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         }
 
     }
-
+    
+    /// <summary>
+    /// Maneja el clic izquierdo, seleccionando o equipando el objeto.
+    /// </summary>
     public void OnClickIzquierdo()
     {
         // Si está seleccionado y se vuelve a hacer click se usa el objeto.
@@ -112,7 +137,9 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
 
     }
-
+    /// <summary>
+    /// Equipa el objeto en la ranura correspondiente del personaje según su tipo.
+    /// </summary>
     private void EquiparPieza()
     {
         if (tipoObjeto == TipoObjeto.cabeza)
@@ -150,6 +177,10 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         VaciarRanura();
     }
 
+
+    /// <summary>
+    /// Vacía la ranura, restaurando su imagen y estado.
+    /// </summary>
     private void VaciarRanura()
     {
 
@@ -159,6 +190,9 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
     }
 
+    /// <summary>
+    /// Maneja el clic derecho, quitando el objeto del inventario y creandolo en el nivel.
+    /// </summary>
     public void OnClickDerecho()
     {
         GameObject objetoATirar = new GameObject(nombreObjeto);
@@ -181,10 +215,14 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         // Posición donde se tira el objeto
         objetoATirar.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1, 0, 0);
         objetoATirar.transform.localScale = new Vector3(5,5,5);
-        restarCantidad();
+        RestarCantidad();
 
     }
-    private void restarCantidad()
+
+    /// <summary>
+    /// Reduce la cantidad del objeto en la ranura y la vacía si no quedan unidades.
+    /// </summary>
+    private void RestarCantidad()
     {
         this.cantidad -= 1;
         if (this.cantidad <= 0)

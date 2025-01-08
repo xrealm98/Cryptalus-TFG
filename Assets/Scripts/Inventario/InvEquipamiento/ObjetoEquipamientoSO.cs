@@ -15,6 +15,10 @@ public class ObjetoEquipamientoSO : ScriptableObject
     public int nivelMinimoDrop;
     public int nivelMaximoDrop;
 
+    /// <summary>
+    /// Aplica las estadísticas del objeto al jugador al equiparlo.
+    /// </summary>
+    /// <param name="estadisticasPlayer">Instancia de las estadísticas del jugador.</param>
     public void EquiparPieza(EstadisticasPlayer estadisticasPlayer)
     {
 
@@ -31,7 +35,11 @@ public class ObjetoEquipamientoSO : ScriptableObject
         estadisticasPlayer.ActualizarEstadistasEquipamiento();
 
     }
-
+    
+    /// <summary>
+    /// Elimina las estadísticas del objeto al jugador al desequiparlo.
+    /// </summary>
+    /// <param name="estadisticasPlayer">Instancia de las estadísticas del jugador.</param>
     public void DesequiparPieza(EstadisticasPlayer estadisticasPlayer)      
     {
         Debug.Log("Desequipando pieza: " + this.nombreObjeto);

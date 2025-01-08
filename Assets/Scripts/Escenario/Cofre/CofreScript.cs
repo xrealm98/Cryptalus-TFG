@@ -10,10 +10,12 @@ public class CofreScript : MonoBehaviour
     private bool cofreYaAbierto = false;
 
     [SerializeField] private LayerMask layerObstaculos;
+    [SerializeField] private float distanciaChequeo = 1f;
 
     void Start() {
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         am = GetComponent<Animator>();
+        AjustarRotacionCofre();
 
     }
 
@@ -56,6 +58,29 @@ public class CofreScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             jugadorDentroCollider = false;
+        }
+    }
+    private void AjustarRotacionCofre()
+    {
+        // Chequeamos las direcciones (derecha, izquierda, abajo)
+        bool hayParedDerecha = Physics2D.Raycast(transform.position, Vector2.right, distanciaChequeo, layerObstaculos);
+        bool hayParedIzquierda = Physics2D.Raycast(transform.position, Vector2.left, distanciaChequeo, layerObstaculos);
+        bool hayParedAbajo = Physics2D.Raycast(transform.position, Vector2.down, distanciaChequeo, layerObstaculos);
+
+        // Si hay pared a la derecha, el cofre debe mirar a la izquierda
+        if (hayParedDerecha)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        // Si hay pared a la izquierda, el cofre debe mirar a la derecha
+        else if (hayParedIzquierda)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        // Si hay pared abajo, el cofre debe mirar hacia arriba
+        else if (hayParedAbajo)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
         }
     }
 }

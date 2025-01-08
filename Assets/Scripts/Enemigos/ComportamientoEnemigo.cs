@@ -41,6 +41,7 @@ public class ComportamientoEnemigo : MonoBehaviour
     public EnemigoDatos enemigoDatosSO;
     public EstadisticasPlayer estadisticasPlayer;
 
+    private bool playerEstaEnRango = false;
 
     void Start()
     {
@@ -110,7 +111,18 @@ public class ComportamientoEnemigo : MonoBehaviour
     // Método para seguir al jugador.
     void Seguimiento()
     {
-      
+        if (playerEstaEnRango) {
+            if (tiempoProximoAtaqueColdoown <= 0)
+            {
+                CambioEstado(EstadoEnemigo.Atacando);
+            }
+            else
+            {
+                CambioEstado(EstadoEnemigo.Idle);
+            }
+            return;
+        }
+    
         if (player.position.x < transform.position.x && mirandoDireccion ||
                    player.position.x > transform.position.x && !mirandoDireccion)
         {
@@ -127,16 +139,18 @@ public class ComportamientoEnemigo : MonoBehaviour
         Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoDetector.position, rangoDetector, layerPlayer);
         if (enemigosGolpeados.Length > 0)
         {
+           
             player = enemigosGolpeados[0].transform;
-           // Debug.Log(Vector2.Distance(transform.position, player.position));
-            
-            if (Vector2.Distance(transform.position, player.position) <= rangoAtaque && tiempoProximoAtaqueColdoown <= 0)
+            Debug.Log(playerEstaEnRango);
+            CheckRangoAtaque();
+            Debug.Log(playerEstaEnRango);
+            if (playerEstaEnRango && tiempoProximoAtaqueColdoown <= 0)
             {
                 tiempoProximoAtaqueColdoown = velocidadAtaque.Valor;
                 CambioEstado(EstadoEnemigo.Atacando);
 
             }
-            else if (Vector2.Distance(transform.position, player.position) > rangoAtaque && estadoEnemigo != EstadoEnemigo.Atacando)
+            else if (!playerEstaEnRango && estadoEnemigo != EstadoEnemigo.Atacando)
             {
                 CambioEstado(EstadoEnemigo.Seguimiento);
 
@@ -147,6 +161,12 @@ public class ComportamientoEnemigo : MonoBehaviour
             CambioEstado(EstadoEnemigo.Idle);
         
         }
+    }
+
+    private void CheckRangoAtaque() {
+        
+        Collider2D[] enemigosEnRango = Physics2D.OverlapCircleAll(puntoAtaque.position, rangoAtaque, layerPlayer);
+        playerEstaEnRango = enemigosEnRango.Length > 0;
     }
     // Método donde cambiamos el estado del enemigo según su acción actual.
     public void CambioEstado(EstadoEnemigo nuevoEstado)

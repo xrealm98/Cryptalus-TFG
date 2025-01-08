@@ -59,7 +59,7 @@ public class Enemigo : MonoBehaviour
         estaMuerto = true;
         am.SetBool("estaMuerto", true);
         MonedasManager.AddMonedas(300);
-        estadisticasPlayer.GanarExperiencia(250);
+        estadisticasPlayer.GanarExperiencia(75);
 
         if (Random.value <= probabilidadDrop)
         {

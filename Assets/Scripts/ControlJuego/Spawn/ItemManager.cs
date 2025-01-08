@@ -35,7 +35,7 @@ public class ItemManager : MonoBehaviour
     void GenerarConsumible(Vector3 posicionEnemigo)
     {
         // Seleccionamos un consumible aleatorio
-        ObjetoSO consumibleSO = bibliotecaSO.consumibleSO[Random.Range(0, bibliotecaSO.consumibleSO.Length)];
+        ObjetoConsumibleSO consumibleSO = bibliotecaSO.consumibleSO[Random.Range(0, bibliotecaSO.consumibleSO.Length)];
 
         // Creamos el gameobject para el consumible
         GameObject nuevoConsumible = Instantiate(objetoPrefab, posicionEnemigo, Quaternion.identity);

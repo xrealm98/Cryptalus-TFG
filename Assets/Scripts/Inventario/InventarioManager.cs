@@ -17,18 +17,23 @@ public enum TipoObjeto
     manoSecundaria
 };
 
+/// <summary>
+/// Administra el inventario de equipamiento y consumibles del juego. Se encarga de gestionar los objetos.
+/// </summary>
 public class InventarioManager : MonoBehaviour
 {
 
     public GameObject MenuInventario;
     public GameObject MenuEquipamiento;
 
-    public RanuraObjeto[] ranuraObjeto;
+    public RanuraObjetoConsumible[] ranuraObjeto;
     public RanuraObjetoEquipamiento[] ranuraObjetoEquipamiento;
-    public ObjetoSO[] objetoSOs;
+    public ObjetoConsumibleSO[] objetoSOs;
     public RanuraEquipada[] ranuraEquipada;
 
-
+    /// <summary>
+    /// Muestra el inventario de consumibles o de equipamiento según las entradas del jugador.
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -42,6 +47,10 @@ public class InventarioManager : MonoBehaviour
 
 
     }
+    
+    /// <summary>
+    /// Alterna la visibilidad del menú de inventario y pausa o reanuda el juego.
+    /// </summary>
     void Inventario()
     {
 
@@ -82,7 +91,10 @@ public class InventarioManager : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// Usa un objeto basado en su nombre si está disponible en el inventario.
+    /// </summary>
+    /// <param name="nombreObjeto">Nombre del objeto a usar.</param>
     public bool UsarObjeto(string nombreObjeto)
     {
         for (int i = 0; i < objetoSOs.Length; i++)
@@ -96,6 +108,15 @@ public class InventarioManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Añade el objeto al inventario según su tipo.
+    /// </summary>
+    /// <param name="nombreObjeto">Nombre del objeto.</param>
+    /// <param name="cantidad">Cantidad del objeto.</param>
+    /// <param name="sprite">Sprite representativo.</param>
+    /// <param name="descripcionObjeto">Descripción.</param>
+    /// <param name="tipoObjeto">Tipo del objeto.</param>
+    /// <returns>Cantidad de objetos sobrantes si no caben en el inventario.</returns>
     public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto)
     {
         if (tipoObjeto == TipoObjeto.consumible)
@@ -132,12 +153,12 @@ public class InventarioManager : MonoBehaviour
             }
             return cantidad;
 
-
-
         }
-
-
     }
+
+    /// <summary>
+    /// Deselecciona todas las ranuras en el inventario y equipamiento.
+    /// </summary>
     public void DeseleccionarSlots()
     {
         for (int i = 0; i < ranuraObjeto.Length; i++)

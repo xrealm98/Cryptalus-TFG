@@ -6,7 +6,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
+/// <summary>
+/// Clase principal que da lógica a las ranuras del inventario de objetos consumibles.
+/// </summary>
+public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
 {
    
     // Información sobre el objeto.
@@ -43,7 +46,16 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
     {
         inventarioManager = GameObject.Find("CanvasInventario").GetComponent<InventarioManager>();
     }
-
+    
+    /// <summary>
+    /// Añade un objeto a la ranura. 
+    /// </summary>
+    /// <param name="nombreObjeto">Nombre del objeto.</param>
+    /// <param name="cantidad">Cantidad del objeto.</param>
+    /// <param name="sprite">Sprite del objeto.</param>
+    /// <param name="descripcionObjeto">Descripción del objeto.</param>
+    /// <param name="tipoObjeto">Tipo del objeto.</param>
+    /// <returns>Cantidad sobrante si se excede el límite.</returns>
     public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto) {
         if (estaLleno) {
             return cantidad;
@@ -74,6 +86,10 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
         
         return 0;
     }
+    /// <summary>
+    /// Método que da lógica a los clics del jugdor.
+    /// </summary>
+    /// <param name="eventData">Datos del evento de clic.</param>
     public void OnPointerClick(PointerEventData eventData) 
     {
         if (eventData.button == PointerEventData.InputButton.Left) {
@@ -85,7 +101,10 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
         }
 
     }
-
+    /// <summary>
+    /// Maneja el clic izquierdo sobre la ranura. Si el objeto está seleccionado, intenta usarlo.
+    /// Si no está seleccionado, lo selecciona y actualiza la descripción.
+    /// </summary>
     public void OnClickIzquierdo()
     {
         // Si está seleccionado y se vuelve a hacer click se usa el objeto.
@@ -94,7 +113,7 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
             bool objetoUsable = inventarioManager.UsarObjeto(nombreObjeto);
             if (objetoUsable)
             {
-                restarCantidad();
+                RestarCantidad();
             }
             
         }
@@ -112,7 +131,9 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
 
 
     }
-
+    /// <summary>
+    /// Si no queda más cantidad de un grupo de consumibles, se vacía la ranura eliminando la cantidad y reseteando los elementos visuales.
+    /// </summary>
     private void VaciarRanura()
     {
         textoCantidad.enabled = false;
@@ -122,7 +143,10 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
         imagenObjetoDescripcion.sprite = spriteRanuraVacia;
 
     }
-
+    
+    /// <summary>
+    /// Maneja el clic derecho sobre la ranura. Suelta un objeto en el mundo y reduce la cantidad en la ranura.
+    /// </summary>
     public void OnClickDerecho()
     {
         GameObject objetoATirar = new GameObject(nombreObjeto);
@@ -136,8 +160,6 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
 
         SpriteRenderer sr = objetoATirar.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
-        //sr.sortingOrder = 5;
-        //sr.sortingLayerName = "";
 
         // Introducimos collider al objeto tirado
         objetoATirar.AddComponent<BoxCollider2D>();
@@ -145,10 +167,14 @@ public class RanuraObjeto : MonoBehaviour, IPointerClickHandler
         // Posición donde se tira el objeto
         objetoATirar.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1,0,0);
         //objetoATirar.transform.localScale = new Vector3(.5f,.5f,.5f);
-        restarCantidad();
+        RestarCantidad();
 
     }
-    private void restarCantidad() {
+
+    /// <summary>
+    /// Reduce la cantidad del objeto en la ranura. Si llega a cero, llama al método de vacíar la ranura.
+    /// </summary>
+    private void RestarCantidad() {
         this.cantidad -= 1;
         textoCantidad.text = this.cantidad.ToString();
         if (this.cantidad <= 0)

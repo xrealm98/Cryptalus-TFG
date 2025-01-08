@@ -6,6 +6,10 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
+/// <summary>
+/// Clase que gestiona los objetos equipados del personaje.
+/// Permite equipar y desequipar piezas, y actualiza las estadísticas del personaje.
+/// </summary>
 public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
@@ -92,7 +96,13 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
         TooltipManager.instancia.OcultarTooltip();
     }
-
+    /// <summary>
+    /// Equipa una pieza en la ranura de su tipo.
+    /// Introduce el sprite en la ranura y modifica las estadísticas del personaje.
+    /// </summary>
+    /// <param name="sprite">Sprite del objeto.</param>
+    /// <param name="nombreObjeto">Nombre del objeto.</param>
+    /// <param name="descripcionObjeto">Descripción del objeto.</param>
     public void EquiparPieza(Sprite spriteObjeto, string nombreObjeto, string descripcionObjeto)
     {
 
@@ -121,7 +131,11 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
 
     }
-
+    
+    /// <summary>
+    /// Desequipa la pieza actualmente equipada y la vuelve a añadir en el inventario de equipamiento.
+    /// Resta las estadísticas del objeto al perosnaje y se vacía la ranura.
+    /// </summary>
     private void DesequiparPieza()
     {
         inventarioManager.DeseleccionarSlots();

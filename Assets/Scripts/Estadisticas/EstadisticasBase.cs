@@ -4,11 +4,19 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// La clase trabaja con las estadísticas base. Pueden ser modificadas por diferentes factores.
+/// Se permite la acumulación y gestión de modificadores planos, porcentuales y multiplicativos.
+/// </summary>
 [Serializable]
 public class EstadisticasBase
 {
     public float ValorBase;
-
+    
+    /// <summary>
+    /// Valor final calculado de la estadística, teniendo en cuenta todos los modificadores.
+    /// Solo se recalcula el valor si el estado ha cambiado.
+    /// </summary>
     public float Valor { 
         get {
             if (estaMal || ValorBase != ultimoValorBase) {
@@ -19,14 +27,17 @@ public class EstadisticasBase
             return _value;
         } 
     }
-    
+    /// <summary> Boolean que indica si el valor debe recalcularse debido a cambios en los modificadores. </summary>
     protected bool estaMal = true;
+
     protected float _value;
+    
+    // <summary> Último valor base usado para calcular el valor final. </summary>
     protected float ultimoValorBase = float.MinValue;
 
     protected readonly List<ModificadorEstadisticas> modificadorEstadisticas;
 
-    // Lista publica que prohibe cambios. Solo para mostrar.
+   
     public readonly ReadOnlyCollection<ModificadorEstadisticas> ModificadorEstadisticas;
 
     public EstadisticasBase()
@@ -41,15 +52,22 @@ public class EstadisticasBase
         
      }
 
-    // Introducir un modificador.
+    /// <summary>
+    /// Añade un modificador a la estadística y recalcula el orden de los modificadores.
+    /// </summary>
+    /// <param name="mod">Modificador a añadir.</param>
     public virtual void addModificador(ModificadorEstadisticas mod) {
         estaMal = true;
         modificadorEstadisticas.Add(mod);
         modificadorEstadisticas.Sort(compararOrdenModificador);
     }
 
-    // Compara el orden para saber como se debe calcular el modificador.
-
+    /// <summary>
+    /// Compara dos modificadores para saber el orden del cálculo.
+    /// </summary>
+    /// <param name="a">Primer modificador.</param>
+    /// <param name="b">Segundo modificador.</param>
+    /// <returns>-1 si 'a' tiene mayor prioridad, 1 si 'b' tiene mayor prioridad, 0 si son iguales.</returns>
     protected virtual int compararOrdenModificador(ModificadorEstadisticas a, ModificadorEstadisticas b) {
         
         if (a.OrdenCalculo < b.OrdenCalculo) { 
@@ -59,11 +77,15 @@ public class EstadisticasBase
         {
             return 1;
         }
-        return 0;   // if (a.OrdenCalculo == b.OrdenCalculo)
+        return 0;   
 
 
     }
-    // Eliminar un modificador
+    /// <summary>
+    /// Elimina un modificador específico de la estadística.
+    /// </summary>
+    /// <param name="mod">Modificador a eliminar.</param>
+    /// <returns>True si el modificador se elimina, false en caso contrario.</returns>
     public virtual bool removeModificador(ModificadorEstadisticas mod)
     {
         estaMal = true;
@@ -74,7 +96,12 @@ public class EstadisticasBase
         return false;
 
     }
-    // Método para eliminar los modificadores de una sola fuente. Se elimina en reverso para ser más eficiente.
+ 
+    /// <summary>
+    /// Elimina todos los modificadores de una fuente específica. Se elimina en reverso para ser más eficiente.
+    /// </summary>
+    /// <param name="fuente">Fuente de los modificadores a eliminar.</param>
+    /// <returns>True si se eliminaron modificadores, false en caso contrario.</returns>
     public virtual bool borrarTodosModificadoresFuente(object fuente) {
         bool seBorra = false;
         for (int i = modificadorEstadisticas.Count -1; i >= 0; i--) {
@@ -89,7 +116,10 @@ public class EstadisticasBase
         return seBorra; 
     }
 
-    // Metodo que calcula las sumas y multiplicaciones de las estadisticas.
+    /// <summary>
+    /// Calcula el valor final de la estadística aplicando todos los modificadores en orden.
+    /// </summary>
+    /// <returns>Valor final redondeado a 4 decimales.</returns>
     protected virtual float calcularValorFinal()
     {
         float valorFinal = ValorBase;

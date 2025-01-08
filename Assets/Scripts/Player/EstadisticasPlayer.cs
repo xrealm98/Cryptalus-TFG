@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EstadisticasPlayer : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class EstadisticasPlayer : MonoBehaviour
     public int puntosExperienciaActual;
     public int maximoPuntosNivel = 100;
     GameObject equipamientoCanvas;
+    public Slider expSlider;
+    public TMP_Text textoNivelSlider;
 
 
     void Awake()
@@ -65,9 +68,12 @@ public class EstadisticasPlayer : MonoBehaviour
         textoAtaque = GameObject.Find("EstadisticaAtaque").GetComponent<TMP_Text>();
         textoVida = GameObject.Find("EstadisticaVida").GetComponent<TMP_Text>();
         textoArmadura = GameObject.Find("EstadisticaArmadura").GetComponent<TMP_Text>();
-
+        
+        expSlider = GameObject.Find("ExpSlider").GetComponent<Slider>();
+        textoNivelSlider = GameObject.Find("TextoNivel").GetComponent<TMP_Text>();
         equipamientoCanvas.SetActive(false);
         ActualizarEstadistasEquipamiento();
+        ActualizarSliderExp(); 
 
     }
 
@@ -83,6 +89,7 @@ public class EstadisticasPlayer : MonoBehaviour
         }
 
         ActualizarEstadistasEquipamiento();
+        ActualizarSliderExp();
     }
 
 
@@ -105,6 +112,13 @@ public class EstadisticasPlayer : MonoBehaviour
         textoVida.text = vida.Valor.ToString();
         textoArmadura.text = armadura.Valor.ToString();
         textoNivel.text = nivelPlayer.ToString();
+
+    }
+    public void ActualizarSliderExp() {
+        expSlider.maxValue = maximoPuntosNivel;
+        expSlider.value = puntosExperienciaActual;
+        textoNivelSlider.text = "Nivel: " + nivelPlayer;
+
 
     }
 

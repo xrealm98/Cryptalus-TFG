@@ -38,9 +38,10 @@ public class CombateJugador : MonoBehaviour
         rangoAtaque = stats.rangoAtaque.Valor;
     }
 
-    // Update is called once per frame
+ 
     void Update()
     {
+        if (Time.timeScale == 0) return;
         if (Time.time >= tiempoProximoAtaque) {
 
             if (Input.GetMouseButtonDown(0))

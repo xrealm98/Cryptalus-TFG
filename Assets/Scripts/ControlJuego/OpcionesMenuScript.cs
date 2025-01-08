@@ -16,6 +16,7 @@ public class OpcionesMenuScript : MonoBehaviour
     
     public GameObject InterfazPausa;
     public GameObject InterfazOpciones;
+    [SerializeField] Slider sliderVolumen;
 
     private void Start()
     {
@@ -33,19 +34,40 @@ public class OpcionesMenuScript : MonoBehaviour
         bttnDropdownResolucion.AddOptions(opciones);
         bttnDropdownResolucion.value = indiceResolucionActual;
         bttnDropdownResolucion.RefreshShownValue();
+
+        if (!PlayerPrefs.HasKey("volumen"))
+        {
+            PlayerPrefs.SetFloat("volumen", 1);
+            CargarVolumen();
+        }
+        else {
+            CargarVolumen();
+        }
     }
     public void establecerResolucion(int iIndiceResolucion) {
-        Debug.Log("Entro");
         Resolution resolucion = arrayResoluciones[iIndiceResolucion];
         Screen.SetResolution(resolucion.width, resolucion.height, Screen.fullScreen);
     }
-    public void establecerVolumen(float volumen)
+
+    public void CargarVolumen() {
+
+        sliderVolumen.value = PlayerPrefs.GetFloat("volumen", sliderVolumen.value);
+
+    }
+
+    public void GuardarVolumen( )
     {
-        audioMixer.SetFloat("volumen", volumen);
-        Debug.Log(volumen);
+        PlayerPrefs.SetFloat("volumen", sliderVolumen.value);
+
+    }
+    public void EstablecerVolumen(float volumen)
+    {
+        AudioListener.volume = sliderVolumen.value;
+        //audioMixer.SetFloat("volumen", volumen);
+        GuardarVolumen();
+        Debug.Log($"Volumen establecido a: {volumen}");
     }
     public void bttnPantallaCompleta(bool bEstaFull) {
-        Debug.Log("Entro");
         Screen.fullScreen = bEstaFull;
     }
     public void establecerCalidad(int indiceCalidad) {
@@ -65,7 +87,8 @@ public class OpcionesMenuScript : MonoBehaviour
         } else {
             Debug.Log("Entro");
             InterfazOpciones.SetActive(false);
-            InterfazPausa.SetActive(true); 
+            InterfazPausa.SetActive(true);
+            CargarVolumen();
 
         }
     }
