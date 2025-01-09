@@ -6,6 +6,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 
 
+/// <summary>
+/// Clase que gestiona el almacenamiento de los datos del jugador.
+/// </summary>
 
 [System.Serializable]
 public class DatosGuardados
@@ -28,6 +31,9 @@ public class GuardadoManager : MonoBehaviour
     public DatosGuardados datosActuales;
 
 
+    /// <summary>
+    /// Inicializa la instancia singleton y carga los datos almacenados.
+    /// </summary>
     private void Awake()
     {
         if (instancia == null)
@@ -45,7 +51,12 @@ public class GuardadoManager : MonoBehaviour
         MonedasManager.Inicializar(datosActuales.monedas);
     }
 
-
+    /// <summary>
+    /// Actualiza las estadísticas base del jugador si no hay un guardado previo. Se llama desde EstadisticasPlayer
+    /// </summary>
+    /// <param name="ataqueBase">Nuevo valor del ataque base.</param>
+    /// <param name="vidaBase">Nuevo valor de la vida base.</param>
+    /// <param name="armaduraBase">Nuevo valor de la armadura base.</param>
     public void ActualizarEstadisticas(float ataqueBase, float vidaBase, float armaduraBase)
     {
         datosActuales.ataqueBase = ataqueBase;
@@ -53,6 +64,11 @@ public class GuardadoManager : MonoBehaviour
         datosActuales.armaduraBase = armaduraBase;
     }
 
+    /// <summary>
+    /// Actualiza una estadística base específica del jugador cuando se compra en la tienda y se guarda.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística ("Vida", "Ataque", "Armadura").</param>
+    /// <param name="nuevoValor">Nuevo valor de la estadística.</param>
     public void ActualizarEstadisticasBase(string nombreEstadistica, float nuevoValor)
     {
         switch (nombreEstadistica)
@@ -70,6 +86,11 @@ public class GuardadoManager : MonoBehaviour
         GuardarDatos();
     }
 
+    /// <summary>
+    /// Envía el valor de la estadistica actual a la tienda (scriptTienda).
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística ("Vida", "Ataque", "Armadura").</param>
+    /// <returns>Valor actual de la estadística.</returns>
     public float ObtenerEstadisticaBase(string nombreEstadistica)
     {
         switch (nombreEstadistica)
@@ -85,7 +106,12 @@ public class GuardadoManager : MonoBehaviour
                 return 0;
         }
     }
-
+    
+    /// <summary>
+    /// Guarda los datos del jugador en la ruta establecida usando BinaryFormatter y filestream.
+    /// Guarda las monedas, estadisticas mejoradas y el número de compras realizadas.
+    /// </summary>
+    /// <returns> Datos cargados o null.</returns>
     public void GuardarDatos()
     {
         
@@ -97,7 +123,10 @@ public class GuardadoManager : MonoBehaviour
         stream.Close();
         Debug.Log("Datos guardados correctamente en: " + pathGuardado);
     }
-
+    /// <summary>
+    /// Carga los datos del jugador desde el archivo de guardado usando BinaryFormatter y filestream.
+    /// </summary>
+    /// <returns> Datos cargados o null.</returns>
     public DatosGuardados CargarDatos()
     {
         if (File.Exists(pathGuardado))

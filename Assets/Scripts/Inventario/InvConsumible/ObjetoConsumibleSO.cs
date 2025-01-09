@@ -45,11 +45,11 @@ public class ObjetoConsumibleSO : ScriptableObject
                 if (tipoDeCambio == TipoDeCambio.Porcentual)
                 {
                     float cantidadCuracion = combateJugador.vidaMaxima * (cantidadModificadorEstadistica / 100f);
-                    combateJugador.curarVida(cantidadCuracion);
+                    combateJugador.CurarVida(cantidadCuracion);
                 }
                 else
                 {
-                    combateJugador.curarVida(cantidadModificadorEstadistica);
+                    combateJugador.CurarVida(cantidadModificadorEstadistica);
                 }
                 return true;
            }

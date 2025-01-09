@@ -22,7 +22,7 @@ public class TrampasSpawn : MonoBehaviour
 
         if (posicionesSpawn.Count == 0)
         {
-            Debug.LogWarning("No hay posiciones válidas para spawnear enemigos.");
+            Debug.LogWarning("No hay posiciones válidas para spawnear trampas.");
             return;
         }
         int cantidadMaximaTrampas = posicionesSpawn.Count;

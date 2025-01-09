@@ -18,5 +18,5 @@ MonoBehaviour:
   armadura: 20
   velocidadMovimiento: 2.5
   velocidadAtaque: 2
-  rangoAtaque: 1.3
+  rangoAtaque: 0.75
   rangoDetencion: 6

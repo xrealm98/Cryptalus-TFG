@@ -83,18 +83,18 @@ public class CombateJugador : MonoBehaviour
 
         if (vidaActual <= 0)
         {
-            muertePlayer();
+            MuertePlayer();
         }
 
     }
 
-    public void curarVida(float cantidad) {
+    public void CurarVida(float cantidad) {
         vidaActual = Mathf.Clamp(vidaActual + cantidad, 0, vidaMaxima);
         barraVida.SetVida(vidaActual);
 
     }
 
-    void muertePlayer()
+    void MuertePlayer()
     {
         am.SetBool("estaMuerto", true);
         GuardadoManager.instancia.GuardarDatos();

@@ -27,7 +27,8 @@ public class Enemigo : MonoBehaviour
         Invoke("InicializarVida", 0.1f);
 
     }
-    public void InicializarVida() {
+    public void InicializarVida()
+    {
         vidaActual = comportamientoEnemigo.vida.Valor;
         vidaMax = vidaActual;
         barraVida.SetVidaMaxima(vidaMax);
@@ -53,13 +54,14 @@ public class Enemigo : MonoBehaviour
     }
     void MuerteEnemigo()
     {
-        if (estaMuerto) {
+        if (estaMuerto)
+        {
             return;
         }
         estaMuerto = true;
         am.SetBool("estaMuerto", true);
         MonedasManager.AddMonedas(300);
-        estadisticasPlayer.GanarExperiencia(75);
+        estadisticasPlayer.GanarExperiencia(300);
 
         if (Random.value <= probabilidadDrop)
         {

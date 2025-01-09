@@ -32,9 +32,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 690327345388209642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7912584650790171084
@@ -826,9 +826,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 116789330225203807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7333346217427287673
@@ -1187,9 +1187,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 339804918794483642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6984122069973255068
@@ -1398,9 +1398,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 522895057579825240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7141053736344775806
@@ -1825,6 +1825,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 6919240123750051590}
   imagenObjeto: {fileID: 3441193806244046475}
@@ -1930,6 +1931,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 7949292659291979536}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -2037,6 +2039,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 7733112696232077040}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -2563,6 +2566,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 7630528285772784017}
   imagenObjeto: {fileID: 2747920073594087452}
@@ -3171,6 +3175,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 7085966147808323309}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -3278,6 +3283,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 7096614603160291884}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -4001,6 +4007,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 5781521115913317155}
   imagenObjeto: {fileID: 2304595484236178094}
@@ -4354,6 +4361,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 6506969032877303313}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -4686,6 +4694,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 6397382864777011660}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -4794,6 +4803,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 6227441770995432023}
   imagenObjeto: {fileID: 1849808435159217114}
@@ -5365,6 +5375,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 6745125096072462415}
   imagenObjeto: {fileID: 1323205322412378562}
@@ -5405,9 +5416,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2684842839472350548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4691016432817017202
@@ -5541,9 +5552,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2860035153348470594}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4894091253872005988
@@ -5915,6 +5926,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 5699357862368279699}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -6375,9 +6387,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4329774335654236766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6362986010712876664
@@ -6586,9 +6598,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4553390264372594721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6587438676470578183
@@ -6862,6 +6874,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 5211972254941496594}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -6904,9 +6917,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3526267469305029486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6103641201433712456
@@ -7255,6 +7268,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 4971494798404320448}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -7800,6 +7814,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 5675451344468588804}
   imagenObjeto: {fileID: 73402703918870665}
@@ -8042,6 +8057,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 3586234636485068019}
   imagenObjeto: {fileID: 9080201148733197694}
@@ -8147,6 +8163,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 4567071164913487226}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -8567,6 +8584,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 3617047920963201809}
   imagenObjeto: {fileID: 9076391902976189084}
@@ -8747,6 +8765,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 4236995868980619383}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -9037,6 +9056,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 3970913080960767732}
   imagenObjeto: {fileID: 8708840021969166201}
@@ -9935,6 +9955,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 4544666654258567489}
   imagenObjeto: {fileID: 8130793435718619340}
@@ -10730,6 +10751,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 3132956241596946529}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -11052,9 +11074,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6872627319277747514}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4268241343553587484
@@ -11253,6 +11275,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 2943315685080638209}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -11957,9 +11980,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6233961643613565869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3663915606222768011
@@ -12158,6 +12181,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 2273548120854765776}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -12475,6 +12499,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 1240053402076478441}
   imagenObjeto: {fileID: 6841542107727622756}
@@ -12580,6 +12605,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 2199351209905022682}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -12688,6 +12714,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 1425131412389853695}
   imagenObjeto: {fileID: 6629460053307715698}
@@ -12803,9 +12830,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7718625124056276196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1100492833939499202
@@ -13613,6 +13640,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 1705026804588219402}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -13789,9 +13817,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6983181303925696252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &338494157825233626
@@ -14599,9 +14627,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7402081589327411080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &207962994259624878
@@ -15035,9 +15063,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8666667051415201199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -109, y: 25}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2025919456147624329
@@ -15986,6 +16014,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 462391621989597125}
   imagenObjeto: {fileID: 5308962249585292872}
@@ -16091,6 +16120,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 604194584334104684}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}
@@ -16199,6 +16229,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 699618683606652042}
   imagenObjeto: {fileID: 5076133813888408839}
@@ -16689,6 +16720,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   numeroMaxObjetos: 9
   textoCantidad: {fileID: 761985743403437813}
   imagenObjeto: {fileID: 4995787539291457400}
@@ -17362,6 +17394,7 @@ MonoBehaviour:
   estaLleno: 0
   spriteRanuraVacia: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
   imagenObjeto: {fileID: 63774436220479516}
   ranuraCabeza: {fileID: 8244194578282085970}
   ranuraCuerpo: {fileID: 4819884164712140899}

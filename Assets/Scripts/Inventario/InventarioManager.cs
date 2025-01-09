@@ -117,7 +117,7 @@ public class InventarioManager : MonoBehaviour
     /// <param name="descripcionObjeto">Descripción.</param>
     /// <param name="tipoObjeto">Tipo del objeto.</param>
     /// <returns>Cantidad de objetos sobrantes si no caben en el inventario.</returns>
-    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto)
+    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto, Vector3 escala)
     {
         if (tipoObjeto == TipoObjeto.consumible)
         {
@@ -125,10 +125,10 @@ public class InventarioManager : MonoBehaviour
             {
                 if (ranuraObjeto[i].estaLleno == false && ranuraObjeto[i].nombreObjeto == nombreObjeto || ranuraObjeto[i].cantidad == 0)
                 {
-                    int objetosSobrantes = ranuraObjeto[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
+                    int objetosSobrantes = ranuraObjeto[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto, escala);
                     if (objetosSobrantes > 0)
                     {
-                        objetosSobrantes = AddObjeto(nombreObjeto, objetosSobrantes, sprite, descripcionObjeto, tipoObjeto);
+                        objetosSobrantes = AddObjeto(nombreObjeto, objetosSobrantes, sprite, descripcionObjeto, tipoObjeto, escala);
                     }
                     return objetosSobrantes;
 
@@ -142,10 +142,10 @@ public class InventarioManager : MonoBehaviour
             {
                 if (ranuraObjetoEquipamiento[i].estaLleno == false && ranuraObjetoEquipamiento[i].nombreObjeto == nombreObjeto || ranuraObjetoEquipamiento[i].cantidad == 0)
                 {
-                    int objetosSobrantes = ranuraObjetoEquipamiento[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
+                    int objetosSobrantes = ranuraObjetoEquipamiento[i].AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto, escala);
                     if (objetosSobrantes > 0)
                     {
-                        objetosSobrantes = AddObjeto(nombreObjeto, objetosSobrantes, sprite, descripcionObjeto, tipoObjeto);
+                        objetosSobrantes = AddObjeto(nombreObjeto, objetosSobrantes, sprite, descripcionObjeto, tipoObjeto, escala);
                     }
                     return objetosSobrantes;
 

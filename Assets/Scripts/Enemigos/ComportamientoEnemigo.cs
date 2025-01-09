@@ -12,7 +12,7 @@ public enum EstadoEnemigo
 
 };
 public class ComportamientoEnemigo : MonoBehaviour
-{ 
+{
     public Transform puntoAtaque;
     private Rigidbody2D rb;
     private Animator am;
@@ -50,9 +50,9 @@ public class ComportamientoEnemigo : MonoBehaviour
         CambioEstado(EstadoEnemigo.Idle);
 
         estadisticasPlayer = GameObject.Find("Player").GetComponent<EstadisticasPlayer>();
-      
+
         IniciarEstadisticas();
-       
+
 
     }
 
@@ -78,7 +78,7 @@ public class ComportamientoEnemigo : MonoBehaviour
         //Debug.Log("Ataque: " + ataque.Valor);
         //Debug.Log("Armadura: " + armadura.Valor);
         //Debug.Log("Vida: " + vida.Valor);
-        
+
 
     }
 
@@ -105,13 +105,14 @@ public class ComportamientoEnemigo : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
-        
+
     }
 
     // Método para seguir al jugador.
     void Seguimiento()
     {
-        if (playerEstaEnRango) {
+        if (playerEstaEnRango)
+        {
             if (tiempoProximoAtaqueColdoown <= 0)
             {
                 CambioEstado(EstadoEnemigo.Atacando);
@@ -122,7 +123,7 @@ public class ComportamientoEnemigo : MonoBehaviour
             }
             return;
         }
-    
+
         if (player.position.x < transform.position.x && mirandoDireccion ||
                    player.position.x > transform.position.x && !mirandoDireccion)
         {
@@ -139,11 +140,10 @@ public class ComportamientoEnemigo : MonoBehaviour
         Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(puntoDetector.position, rangoDetector, layerPlayer);
         if (enemigosGolpeados.Length > 0)
         {
-           
+
             player = enemigosGolpeados[0].transform;
-            Debug.Log(playerEstaEnRango);
             CheckRangoAtaque();
-            Debug.Log(playerEstaEnRango);
+
             if (playerEstaEnRango && tiempoProximoAtaqueColdoown <= 0)
             {
                 tiempoProximoAtaqueColdoown = velocidadAtaque.Valor;
@@ -156,15 +156,17 @@ public class ComportamientoEnemigo : MonoBehaviour
 
             }
         }
-        else {
+        else
+        {
             rb.velocity = Vector2.zero;
             CambioEstado(EstadoEnemigo.Idle);
-        
+
         }
     }
 
-    private void CheckRangoAtaque() {
-        
+    private void CheckRangoAtaque()
+    {
+
         Collider2D[] enemigosEnRango = Physics2D.OverlapCircleAll(puntoAtaque.position, rangoAtaque, layerPlayer);
         playerEstaEnRango = enemigosEnRango.Length > 0;
     }

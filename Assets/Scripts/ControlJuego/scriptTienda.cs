@@ -5,11 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class scriptTienda  : MonoBehaviour
+/// <summary>
+/// Clase que gestiona la lógica de la tienda del juego. Interactua con GuardadoManager y EstadisticasPlayer.
+/// </summary>
+public class scriptTienda : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textoMonedas, textoVida, textoAtaque, textoArmadura ;
-    [SerializeField] private Button botonVolver,botonVida, botonAtaque, botonArmadura;
-          
+    [SerializeField] private TextMeshProUGUI textoMonedas, textoVida, textoAtaque, textoArmadura;
+    [SerializeField] private Button botonVolver, botonVida, botonAtaque, botonArmadura;
+
     public class EstadisticaMejora
     {
         public float incremento;
@@ -21,7 +24,9 @@ public class scriptTienda  : MonoBehaviour
 
     private Dictionary<string, EstadisticaMejora> mejoras = new Dictionary<string, EstadisticaMejora>();
 
-
+    /// <summary>
+    /// Inicializa las mejoras disponibles y se actualiza la interfaz de la tienda.
+    /// </summary>
     void Start()
     {
         InicializarMejoras();
@@ -29,6 +34,9 @@ public class scriptTienda  : MonoBehaviour
         InicializarTextosYBotones();
     }
 
+    /// <summary>
+    /// Inicializa los valores de las mejoras disponibles en la tienda.
+    /// </summary>
     private void InicializarMejoras()
     {
         mejoras.Add("Vida", new EstadisticaMejora
@@ -57,11 +65,14 @@ public class scriptTienda  : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Actualiza el texto que muestra las monedas del jugador.
+    /// </summary>
     public void ActualizarTextoMonedas()
     {
         if (textoMonedas != null)
         {
-            
+
             textoMonedas.text = "Monedas: " + MonedasManager.GetMonedasTotal().ToString();
         }
         else
@@ -70,15 +81,19 @@ public class scriptTienda  : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Permite al jugador comprar una mejora si tiene suficientes monedas. Se guarda las compras realizadas en el archivo de guardado.
+    /// También, llama a la función de desactivar botón en caso de alcanzar el limite de compras.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística a mejorar ("Vida", "Ataque", "Armadura").</param>
     public void ComprarMejora(string nombreEstadistica)
     {
         int costo = ObtenerCosteMejora(nombreEstadistica);
 
-       
+
         if (MonedasManager.GetMonedasTotal() >= costo)
         {
-           
+
             MonedasManager.AddMonedas(-costo);
             ActualizarTextoMonedas();
 
@@ -106,7 +121,7 @@ public class scriptTienda  : MonoBehaviour
                 // Desactivar el botón de mejora si el límite es alcanzado
                 DesactivarBotonMejora(nombreEstadistica);
             }
-            
+
             ActualizarTextoMejoras(nombreEstadistica, costo);
 
             Debug.Log($"{nombreEstadistica} mejorada. Costo actual: {costo}");
@@ -116,12 +131,23 @@ public class scriptTienda  : MonoBehaviour
             Debug.LogWarning("No tienes suficientes monedas para comprar esta mejora.");
         }
     }
+    
+    /// <summary>
+    /// Calcula el costo actual de una estadística específica.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística.</param>
+    /// <returns>El costo actual de la mejora.</returns>
     private int ObtenerCosteMejora(string nombreEstadistica)
     {
         var mejora = mejoras[nombreEstadistica];
         return mejora.costoInicial + (mejora.comprasRealizadas * mejora.incrementoCosto);
     }
 
+    /// <summary>
+    /// Actualiza los texto de las mejoras de la tienda.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística.</param>
+    /// <param name="costo">Costo actual de la mejora.</param>
     private void ActualizarTextoMejoras(string nombreEstadistica, int costo)
     {
         var mejora = mejoras[nombreEstadistica];
@@ -137,24 +163,31 @@ public class scriptTienda  : MonoBehaviour
         // Actualizamos directamente el texto y su color
         if (mejora.comprasRealizadas >= mejora.limiteCompras)
         {
-            texto = "Ya has comprado todas las mejoras de este tipo.";                      
+            texto = "Ya has comprado todas las mejoras de este tipo.";
             textoComponentes[nombreEstadistica].text = texto;
             textoComponentes[nombreEstadistica].color = Color.red;
-        }else{
-            texto = $"Costo: {ObtenerCosteMejora(nombreEstadistica)}    Aumento {nombreEstadistica.ToLower()}: {mejora.incremento}    {mejora.comprasRealizadas}/{mejora.limiteCompras}";              
+        }
+        else
+        {
+            texto = $"Costo: {ObtenerCosteMejora(nombreEstadistica)}    Aumento {nombreEstadistica.ToLower()}: {mejora.incremento}    {mejora.comprasRealizadas}/{mejora.limiteCompras}";
             textoComponentes[nombreEstadistica].text = texto;
             textoComponentes[nombreEstadistica].color = Color.white;
         }
     }
 
+
+
+    /// <summary>
+    /// Inicializa los textos y botones en la tienda.
+    /// </summary>
     private void InicializarTextosYBotones()
     {
-       
+
         ActualizarTextoMejoras("Vida", ObtenerCosteMejora("Vida"));
         ActualizarTextoMejoras("Ataque", ObtenerCosteMejora("Ataque"));
         ActualizarTextoMejoras("Armadura", ObtenerCosteMejora("Armadura"));
 
-       
+
         if (mejoras["Vida"].comprasRealizadas >= mejoras["Vida"].limiteCompras)
             DesactivarBotonMejora("Vida");
 
@@ -165,6 +198,10 @@ public class scriptTienda  : MonoBehaviour
             DesactivarBotonMejora("Armadura");
     }
 
+    /// <summary>
+    /// Aplica la mejora comprada a la estadística correspondiente y lo guarda en el archivo de guardado.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística a mejorar.</param>
     private void AplicarMejora(string nombreEstadistica)
     {
         var mejora = mejoras[nombreEstadistica];
@@ -173,7 +210,11 @@ public class scriptTienda  : MonoBehaviour
         GuardadoManager.instancia.ActualizarEstadisticasBase(nombreEstadistica, estadisticaActual + mejora.incremento);
         GuardadoManager.instancia.GuardarDatos();
     }
-
+    
+    /// <summary>
+    /// Desactiva el botón de mejora en la interfaz si se alcanza el límite de compras.
+    /// </summary>
+    /// <param name="nombreEstadistica">Nombre de la estadística.</param>
     private void DesactivarBotonMejora(string nombreEstadistica)
     {
         switch (nombreEstadistica)
@@ -189,9 +230,13 @@ public class scriptTienda  : MonoBehaviour
                 break;
         }
     }
-
-    public void VolverAlMenu() {
-       SceneManager.LoadScene("Menu Principal");
+   
+    /// <summary>
+    /// Regresa al menú principal del juego.
+    /// </summary>
+    public void VolverAlMenu()
+    {
+        SceneManager.LoadScene("Menu Principal");
 
     }
 }

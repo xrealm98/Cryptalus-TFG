@@ -23,6 +23,8 @@ public class Objeto : MonoBehaviour
 
     public TipoObjeto tipoObjeto;
 
+    public Vector3 escala;
+
     void Start()
     {
         inventarioManager = GameObject.Find("CanvasInventario").GetComponent<InventarioManager>();
@@ -35,7 +37,7 @@ public class Objeto : MonoBehaviour
 
         if (jugadorDentroCollider && Input.GetKeyDown(KeyCode.E))
         {
-            int objetosSobrantes = inventarioManager.AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto);
+            int objetosSobrantes = inventarioManager.AddObjeto(nombreObjeto, cantidad, sprite, descripcionObjeto, tipoObjeto, escala);
             if (objetosSobrantes <= 0)
             {
                 Destroy(gameObject);

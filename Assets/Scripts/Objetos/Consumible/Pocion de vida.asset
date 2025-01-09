@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: a2161a2a763e93240b4d867eeb255e14, type: 2}
   descripcion: "Poci\xF3n de vida que restaura un 15% de la salud del jugador."
   cantidad: 0
-  escala: {x: 0.2, y: 0.2, z: 0.2}
+  escala: {x: 1, y: 1, z: 1}
   tipoObjeto: 1
   estadisticaACambiar: 1
   cantidadModificadorEstadistica: 15

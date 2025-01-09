@@ -47,6 +47,9 @@ public class ItemManager : MonoBehaviour
         SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = consumibleSO.sprite;
 
+        nuevoConsumible.transform.localScale = Vector3.one;
+        hijoSprite.localScale = consumibleSO.escala;
+
         Objeto objeto = nuevoConsumible.GetComponent<Objeto>();
         if (objeto != null)
         {
@@ -55,6 +58,8 @@ public class ItemManager : MonoBehaviour
             objeto.sprite = consumibleSO.sprite;
             objeto.descripcionObjeto = consumibleSO.descripcion;
             objeto.tipoObjeto = consumibleSO.tipoObjeto;
+            objeto.escala = consumibleSO.escala;
+
         }
 
         nuevoConsumible.transform.localScale = consumibleSO.escala;
@@ -85,7 +90,9 @@ public class ItemManager : MonoBehaviour
             SpriteRenderer spriteRenderer = hijoSprite.GetComponent<SpriteRenderer>();
 
             spriteRenderer.sprite = objetoSO.sprite;
-
+            
+            nuevoObjeto.transform.localScale = Vector3.one; 
+            hijoSprite.localScale = objetoSO.escala;
 
             Objeto objeto = nuevoObjeto.GetComponent<Objeto>();
             if (objeto != null)
@@ -95,10 +102,8 @@ public class ItemManager : MonoBehaviour
                 objeto.sprite = objetoSO.sprite;
                 objeto.descripcionObjeto = objetoSO.descripcion;
                 objeto.tipoObjeto = objetoSO.tipoObjeto;
-
+                objeto.escala = objetoSO.escala;
             }
-
-            nuevoObjeto.transform.localScale = objetoSO.escala;
         }
         else
         {
@@ -109,6 +114,7 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    // El método filtra los objetos que puede optar el jugador según su nivel.
     List<ObjetoEquipamientoSO> FiltrarObjetosPorNivel(int nivelJugador)
     {
         List<ObjetoEquipamientoSO> objetosFiltrados = new();

@@ -21,7 +21,7 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
     public bool estaLleno;
     public Sprite spriteRanuraVacia;
     public TipoObjeto tipoObjeto;
-
+    public Vector3 escala;
     // Información sobre la ranura de objeto.
     [SerializeField]
     private Image imagenObjeto;
@@ -52,7 +52,7 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
     /// <param name="descripcionObjeto">Descripción del objeto.</param>
     /// <param name="tipoObjeto">Tipo del objeto.</param>
     /// <returns>Cantidad sobrante si la ranura ya estaba llena.</returns>
-    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto)
+    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto, Vector3 escala)
     {
         if (estaLleno)
         {
@@ -68,6 +68,8 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         imagenObjeto.raycastTarget = false;
 
         this.descripcionObjeto = descripcionObjeto;
+
+        this.escala = escala;
 
         this.cantidad = 1;
         estaLleno = true;
@@ -144,35 +146,35 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
     {
         if (tipoObjeto == TipoObjeto.cabeza)
         {
-            ranuraCabeza.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraCabeza.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.cuerpo)
         {
-            ranuraCuerpo.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraCuerpo.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.guantes)
         {
-            ranuraGuantes.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraGuantes.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.botas)
         {
-            ranuraBotas.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraBotas.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.accesorio)
         {
-            ranuraAccesorio.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraAccesorio.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.manoPrincipal)
         {
-            ranuraManoPrincipal.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraManoPrincipal.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.manoSecundaria)
         {
-            ranuraManoSecundaria.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraManoSecundaria.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         if (tipoObjeto == TipoObjeto.manos2)
         {
-            ranuraManoPrincipal.EquiparPieza(sprite, nombreObjeto, descripcionObjeto);
+            ranuraManoPrincipal.EquiparPieza(sprite, nombreObjeto, descripcionObjeto, escala);
         }
         VaciarRanura();
     }
@@ -203,6 +205,7 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
         nuevoObjeto.sprite = sprite;
         nuevoObjeto.descripcionObjeto = descripcionObjeto;
         nuevoObjeto.tipoObjeto = tipoObjeto;
+        nuevoObjeto.escala = escala;
 
         SpriteRenderer sr = objetoATirar.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
@@ -214,7 +217,7 @@ public class RanuraObjetoEquipamiento : MonoBehaviour, IPointerClickHandler, IPo
 
         // Posición donde se tira el objeto
         objetoATirar.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1, 0, 0);
-        objetoATirar.transform.localScale = new Vector3(5,5,5);
+        objetoATirar.transform.localScale = escala;
         RestarCantidad();
 
     }

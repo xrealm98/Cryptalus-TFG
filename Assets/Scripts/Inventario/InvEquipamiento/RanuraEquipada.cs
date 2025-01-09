@@ -24,6 +24,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
     private Sprite spriteObjeto;
     private string nombreObjeto;
     private string descripcionObjeto;
+    private Vector3 escala;
 
     private bool ranuraEnUso;
 
@@ -103,7 +104,8 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
     /// <param name="sprite">Sprite del objeto.</param>
     /// <param name="nombreObjeto">Nombre del objeto.</param>
     /// <param name="descripcionObjeto">Descripción del objeto.</param>
-    public void EquiparPieza(Sprite spriteObjeto, string nombreObjeto, string descripcionObjeto)
+    /// <param name="escala"> Tamaño del objeto.</param>
+    public void EquiparPieza(Sprite spriteObjeto, string nombreObjeto, string descripcionObjeto, Vector3 escala)
     {
 
         if (ranuraEnUso)
@@ -116,6 +118,8 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
         this.nombreObjeto = nombreObjeto;
         this.descripcionObjeto = descripcionObjeto;
+        this.escala = escala;
+
 
         // Actualizar estadisticas del jugador al equipar.
         for (int i = 0; i < bibliotecaEquipoSO.equipamientoSO.Length; i++)
@@ -139,7 +143,7 @@ public class RanuraEquipada : MonoBehaviour, IPointerClickHandler, IPointerEnter
     private void DesequiparPieza()
     {
         inventarioManager.DeseleccionarSlots();
-        inventarioManager.AddObjeto(nombreObjeto, 1, spriteObjeto, descripcionObjeto, tipoObjeto);
+        inventarioManager.AddObjeto(nombreObjeto, 1, spriteObjeto, descripcionObjeto, tipoObjeto, escala);
         this.spriteObjeto = spriteVacio;
         imagenRanura.sprite = this.spriteVacio;
         nombreRanura.enabled = true;

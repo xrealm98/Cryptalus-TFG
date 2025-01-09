@@ -20,6 +20,7 @@ public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
     public bool estaLleno;
     public Sprite spriteRanuraVacia;
     public TipoObjeto tipoObjeto;
+    public Vector3 escala;
 
     [SerializeField]
     private int numeroMaxObjetos;
@@ -56,7 +57,7 @@ public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
     /// <param name="descripcionObjeto">Descripción del objeto.</param>
     /// <param name="tipoObjeto">Tipo del objeto.</param>
     /// <returns>Cantidad sobrante si se excede el límite.</returns>
-    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto) {
+    public int AddObjeto(string nombreObjeto, int cantidad, Sprite sprite, string descripcionObjeto, TipoObjeto tipoObjeto, Vector3 escala) {
         if (estaLleno) {
             return cantidad;
         }
@@ -80,6 +81,8 @@ public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
             this.cantidad = numeroMaxObjetos;
             return objetosExtra;
         }
+
+        this.escala = escala;
 
         textoCantidad.text = this.cantidad.ToString();
         textoCantidad.enabled = true;
@@ -157,6 +160,7 @@ public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
         nuevoObjeto.sprite = sprite;
         nuevoObjeto.descripcionObjeto = descripcionObjeto;
         nuevoObjeto.tipoObjeto = tipoObjeto;
+        nuevoObjeto.escala = escala;
 
         SpriteRenderer sr = objetoATirar.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
@@ -166,7 +170,7 @@ public class RanuraObjetoConsumible : MonoBehaviour, IPointerClickHandler
 
         // Posición donde se tira el objeto
         objetoATirar.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1,0,0);
-        //objetoATirar.transform.localScale = new Vector3(.5f,.5f,.5f);
+        objetoATirar.transform.localScale = nuevoObjeto.escala;
         RestarCantidad();
 
     }

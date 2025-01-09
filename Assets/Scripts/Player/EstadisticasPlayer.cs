@@ -4,6 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Clase que gestiona las estadísticas del jugador, incluyendo vida, ataque, armadura, y nivel. 
+/// Gestiona la experiencia que el nivel de persdonaje.
+/// </summary>
 public class EstadisticasPlayer : MonoBehaviour
 {
     [SerializeField]
@@ -24,7 +28,9 @@ public class EstadisticasPlayer : MonoBehaviour
     public Slider expSlider;
     public TMP_Text textoNivelSlider;
 
-
+    /// <summary>
+    /// Inicializa las estadísticas del jugador a partir de los datos guardados o valores predeterminados.
+    /// </summary>
     void Awake()
     {
         
@@ -55,7 +61,6 @@ public class EstadisticasPlayer : MonoBehaviour
         rangoAtaque = new EstadisticasBase(0.75f);
         velocidadAtaque = new EstadisticasBase(2f);
         velocidadMovimiento = new EstadisticasBase(5);
-        // ataque.addModificador(new ModificadorEstadisticas(0.2f, TipoModificadorEstadistica.Porcentaje));
         Debug.Log("Estadísticas cargadas: Vida=" + vida.Valor + ", Armadura=" + armadura.Valor + ", Ataque=" + ataque.Valor);
     }
 
@@ -77,6 +82,10 @@ public class EstadisticasPlayer : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Incrementa los puntos de experiencia del jugador y maneja la lógica para subir de nivel junto su slider.
+    /// </summary>
+    /// <param name="puntosExperiencia"> Experiencia obtenida.</param>
     public void GanarExperiencia(int puntosExperiencia)
     {
         puntosExperienciaActual += puntosExperiencia;
@@ -92,7 +101,9 @@ public class EstadisticasPlayer : MonoBehaviour
         ActualizarSliderExp();
     }
 
-
+    /// <summary>
+    /// Incrementa el nivel del jugador y mejora las estadísticas básicas.
+    /// </summary>
     public void SubirNivel() {
         nivelPlayer++;
         maximoPuntosNivel = Mathf.RoundToInt(maximoPuntosNivel * 1.5f); 
@@ -106,7 +117,10 @@ public class EstadisticasPlayer : MonoBehaviour
         
 
     }
-
+    
+    /// <summary>
+    /// Actualiza las estadísticas mostradas en el inventario de equipamiento.
+    /// </summary>
     public void ActualizarEstadistasEquipamiento() {
         textoAtaque.text = ataque.Valor.ToString();
         textoVida.text = vida.Valor.ToString();
@@ -114,6 +128,10 @@ public class EstadisticasPlayer : MonoBehaviour
         textoNivel.text = nivelPlayer.ToString();
 
     }
+    
+    /// <summary>
+    /// Actualiza el estado de la barra de experiencia.
+    /// </summary>
     public void ActualizarSliderExp() {
         expSlider.maxValue = maximoPuntosNivel;
         expSlider.value = puntosExperienciaActual;

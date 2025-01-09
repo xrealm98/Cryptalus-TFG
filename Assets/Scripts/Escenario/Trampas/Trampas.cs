@@ -15,7 +15,7 @@ public class Trampas : MonoBehaviour
         am = GetComponent<Animator>();
         if (am == null)
         {
-            Debug.LogError($"Animator no encontrado en {gameObject.name}. Asegúrate de que tiene un componente Animator.");
+            Debug.LogError($"Animator no encontrado en {gameObject.name}.");
         }
     }
     private void Update()

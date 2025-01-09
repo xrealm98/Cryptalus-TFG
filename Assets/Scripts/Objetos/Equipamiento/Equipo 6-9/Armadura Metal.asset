@@ -18,7 +18,7 @@ MonoBehaviour:
   ataque: 0
   vida: 0
   armadura: 12
-  escala: {x: 0.5, y: 0.5, z: 0.5}
+  escala: {x: 2, y: 2, z: 2}
   tipoObjeto: 3
   nivelMinimoDrop: 6
   nivelMaximoDrop: 9

@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.021, y: 0.1068, z: -0.70255905}
-  m_LocalScale: {x: 4.641696, y: 4.8717823, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2745641959500980500}
@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.48, y: 1.38, z: 0.70255905}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8218023512480327861}
@@ -136,6 +136,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   descripcionObjeto: 
   tipoObjeto: 0
+  escala: {x: 0, y: 0, z: 0}
 --- !u!61 &4568198354175930943
 BoxCollider2D:
   m_ObjectHideFlags: 0
