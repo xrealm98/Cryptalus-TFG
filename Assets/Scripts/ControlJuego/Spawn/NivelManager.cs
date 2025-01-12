@@ -22,6 +22,8 @@ public class NivelManager : MonoBehaviour
     private GameObject canvasFinPartida;
 
     private bool partidaIniciada = false;
+    
+    public int nivelPartida;
 
     // Mantenemos la presistencia de este script a través de todo el proceso de juego.
     private void Awake()
@@ -45,6 +47,7 @@ public class NivelManager : MonoBehaviour
     // Cuando se llama buscara una escena aleatoria dentro del array y se cargará. Llama a CargarPersonaYInterfaz()
     public void CargarNivel()
     {
+        nivelPartida++;
         int nivelSeleccionado = Random.Range(0, niveles.Length);
         string nivel = niveles[nivelSeleccionado];
         SceneManager.LoadScene(nivel);

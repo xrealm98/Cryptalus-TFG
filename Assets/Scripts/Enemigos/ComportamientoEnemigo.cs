@@ -69,11 +69,12 @@ public class ComportamientoEnemigo : MonoBehaviour
         rangoDetector = enemigoDatosSO.rangoDetencion;
 
 
-        float escalarEstadisticas = estadisticasPlayer.nivelPlayer * 0.05f;
+        float escalarEstadisticasJugador = estadisticasPlayer.nivelPlayer * 0.05f;
+        float escaladoPartida = NivelManager.instancia.nivelPartida * 0.02f;
 
-        ataque.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
-        armadura.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
-        vida.addModificador(new ModificadorEstadisticas(escalarEstadisticas, TipoModificadorEstadistica.PorcentajeMult, this));
+        ataque.addModificador(new ModificadorEstadisticas(escalarEstadisticasJugador + escaladoPartida, TipoModificadorEstadistica.PorcentajeMult, this));
+        armadura.addModificador(new ModificadorEstadisticas(escalarEstadisticasJugador + escaladoPartida, TipoModificadorEstadistica.PorcentajeMult, this));
+        vida.addModificador(new ModificadorEstadisticas(escalarEstadisticasJugador + escaladoPartida, TipoModificadorEstadistica.PorcentajeMult, this));
 
         //Debug.Log("Ataque: " + ataque.Valor);
         //Debug.Log("Armadura: " + armadura.Valor);
@@ -217,7 +218,7 @@ public class ComportamientoEnemigo : MonoBehaviour
             enemigo.GetComponent<CombateJugador>().RecibirDamage(ataque.Valor);
         }
     }
-    // Método para hacer flip al eje del objeto.
+    // Método para hacer flip al eje del objeto.    
     void Flip()
     {
         mirandoDireccion = !mirandoDireccion;
